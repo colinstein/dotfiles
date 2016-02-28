@@ -1,69 +1,53 @@
 # Colin's DotFiles
-A collection of 'dotfiles' I use to configure my regular software suite. You can
-Install the files using the `install.sh` script. I'm assuming you're using
-Mac OS X 10.11, however this should mostly work on Linux too. There are some
-minor exceptions that should be obvious: using Home Brew to install applications,
-using Launchctl to start background tasks, etc. If you just want to see how I
-configure my software then this repository should be of some value.
+This is a script to download and install my regular command line tools
+and then to configure them by simlinking dotfiles to the location where
+they belong.
 
-I have just started working on this project using a new laptop with a fresh
-install of my operating system. For the time being consider this a
-*Work in progress* and use appropriate caution.
+## Prerequisites
+This assumes a clean install of Mac OS X 10.11 along with the XCode
+developer tools and command line tools are installed. To install the
+command line developer tools run:
 
-## Getting Started
+    $ xcode-select --install
+
+You will have to agree to the license in order to continue. XCode can be
+installed from the Mac App Store. Some Homebrew software requires the full
+XCode IDE to build; the command line tools are not enough.
+
+## Get Started
 Assuming you have a mac, git, and the usual tools installed:
 
   1. Clone the repository somewhere:
 
       $ git clone git@github.com/colinstein/dotfiles.git ~/.dotfiles
 
-  2. Rune the installer
+  2. Run the install script for CLI tools
 
-      $ ~/.dotfiles/link_dotfiles.sh
+      $ ~/.dotfiles/bin/install_cli_tools.sh
 
-## Prerequisites
-There are only a handful of applications I use on the desktop, most are going
-to be installed via Home Brew. You can install those applications however you
-like (probably with Home Brew). I'm going to leave the customization and
-installation of various software packages for another document. You'll probably
-find a file called `install_software.sh` that will do all the busy work, and
-then an `install.sh` that first installs the software and then links dotfiles
-added when I'm finally happy with all of this.
+  3. Run the installer
 
-There are going to be some manual steps that must be completed: those will
-include tasks like configuring passwords and user names to be appropriate for
-the computer that this is being run on.
+      $ ~/.dotfiles/bin/link_dotfiles.sh
 
-## Software
-Most of my applications are command line tools however I do use a few graphical
-applications. I try to avoid installing those form the Mac App Store because
-those applications may be more restricted than versions installed from the
-manufacturer due to OS X sandboxes for App Store sourced software.
+### Notes
+#### Known Issues
+This is a work in progress. While I have all of this software working nicely
+on several computers I've never bothered to automate the install process 100%
+so this repository will evolve over time.
 
-### Graphical Software
-My regular suite of graphical tools includes:
+There are no tests. While I like the idea of automatic testing for dotfiles
+I'm not sure of a good way to script that in a way that isn't more work than
+just fixing errors as they appear. Many bits of software depend on passwords
+that I'd rather not have as part of a CI suite and the fact that I'm targeting
+Mac OS X makes automatic testing more complex than just using Vagrant and some
+test-runner.
 
-   1. 1Password
-   2. Creative Cloud
-   3. Alfred + Powerpack
-   4. Amethyst
-   5. Chrome
-   6. Dropbox
-   7. Firefox
-   8. Iterm
-   9. Karabeiner
-  10. Little Snitch
-  11. Paw
-  12. Sequel Pro
-  13. The Unarchiver
-  14. Tor Browser
-  15. Transmission
-  16. Tunnel Bear
-  17. VLC
+While there are third party libraries to handle this sort of bootstrapping, I
+am partial to the simplest solution without any external dependencies. Also,
+I think that using OSAScript might make some of the tricky parts like adding
+passwords to Keychain a little less annoying.
 
-### Command-Line Software
-My regular suite of command line tools includes:
-
+#### Command-Line Software
   * zsh
   * git
   * hub
@@ -93,6 +77,3 @@ My regular suite of command line tools includes:
   * vagrant
   * docker
   * zprezto
-
-This list is presented in no particular order. I haven't finished setting it all
-up so it may be subject to change.
