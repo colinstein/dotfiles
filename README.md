@@ -1,4 +1,4 @@
-# Colin's DotFiles
+# Colin's Dotfiles
 This is a script to download and install my regular command line tools
 and then to configure them by simlinking dotfiles to the location where
 they belong.
@@ -14,6 +14,12 @@ You will have to agree to the license in order to continue. XCode can be
 installed from the Mac App Store. Some Homebrew software requires the full
 XCode IDE to build; the command line tools are not enough.
 
+You'll need to configure your own keychain entries for a number of passwords
+so that they aren't stored on disk. Unfortunately some tools cannot lookup
+passwords from a central repository and so they must be stored on disk. In those
+cases you'll have to rely on disk encryption and permissions to keep those
+secrets safe.
+
 ## Get Started
 Assuming you have a mac, git, and the usual tools installed:
 
@@ -27,7 +33,7 @@ Assuming you have a mac, git, and the usual tools installed:
 
   3. Run the installer
 
-      $ ~/.dotfiles/bin/link_dotfiles.sh
+      $ ~/.dotfiles/bin/install_dotfiles.sh
 
 ### Notes
 #### Known Issues
