@@ -1,0 +1,24 @@
+# iCloud account for colinstein@me.com
+IMAPAccount icloud
+Host imap.mail.me.com
+AuthMechs LOGIN
+User colinstein
+Pass IOUONEPASSWORD
+# PassCmd "echo 'pull this from keychain'"
+SSLType IMAPS
+SSLVersions TLSv1.2
+CertificateFile /usr/local/etc/openssl/cert.pem
+
+IMAPStore icloud-remote
+Account icloud
+
+MaildirStore icloud-local
+Path ~/.mail/icloud/
+Inbox ~/.mail/icloud/Inbox
+
+Channel icloud
+Master :icloud-remote:
+Slave :icloud-local:
+Patterns *
+Create Both
+SyncState *
