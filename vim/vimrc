@@ -18,7 +18,7 @@ call vundle#end()
 syntax on
 set shell=/usr/local/bin/zsh
 set nobackup
-set directory=~/.vim/swap//
+set directory=~/.vim/swap/
 set nocompatible
 set laststatus=2
 set list

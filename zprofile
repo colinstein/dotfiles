@@ -7,7 +7,7 @@ fi
 export EDITOR='/usr/local/bin/vim'
 export VISUAL='/usr/local/bin/vim'
 export PAGER='less'
-export DEFAULT_USER='colin'
+export DEFAULT_USER='cstein'
 
 # Language
 if [[ -z "$LANG" ]]; then
