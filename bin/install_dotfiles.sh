@@ -59,14 +59,14 @@ printf "done.\n"
 
 printf "Mopidy: "
 mkdir -p ~/.config
-ln -sF "$DOTFILES_BASE/config/mopidy" ~/.config/mopidy
+ln -sF "$DOTFILES_BASE/config/mopidy/mopidy.conf" ~/.config/mopidy/mopidy.conf
 printf "done\n"
 
 printf "Vim: "
 mkdir -p ~/.vim/bundle
 mkdir -p ~/.vim/swap
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-ln -sF "$DOTFILES_BASE/vimrc/vimrc" ~/.vim/vimrc
+ln -sF "$DOTFILES_BASE/vim/vimrc" ~/.vim/vimrc
 vim +PluginInstall +qall
 printf "done.\n"
 

@@ -268,6 +268,7 @@ printf "Mopidy: "
 brew list mopidy > /dev/null 2>&1
 if [[ $? != 0 ]]; then
   brew tap mopidy/mopidy
+  pip install gmusicapi
   brew install mopidy
   if [[ $? != 0 ]]; then
     printf "failed!\n"
@@ -395,6 +396,6 @@ else
   printf "skipped.\n"
 fi
 
-printf("\nInstall launchd scripts for manually once you've setup dotfiles:")
-printf("\nMopidy: ln -sfv /usr/local/opt/mopidy/*.plist ~/Library/LaunchAgents")
-printf("\nIsync:  ln -sfv ./launchd/com.colin.icloud.isync.plist ~/Library/LaunchAgents")
+printf "\nInstall launchd scripts for manually once youve setup dotfiles:"
+printf "\nMopidy: ln -sfv /usr/local/opt/mopidy/*.plist ~/Library/LaunchAgents"
+printf "\nIsync:  ln -sfv ./launchd/com.colin.icloud.isync.plist ~/Library/LaunchAgents"
