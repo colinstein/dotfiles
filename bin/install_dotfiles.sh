@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DOTFILES_BASE="`dirname \"$0'"`"
+DOTFILES_BASE="`dirname \"$0\"`"
 DOTFILES_BASE="`(cd \"$DOTFILES_BASE\"/.. && pwd)`"
 
 printf "git: "
@@ -59,7 +59,7 @@ printf "done.\n"
 
 printf "Mopidy: "
 mkdir -p ~/.config
-ln -sF "$DOTFILES_BASE/config/mopidy/mopidy.conf" ~/.config/mopidy/mopidy.conf
+cp "$DOTFILES_BASE/config/mopidy/mopidy.conf" ~/.config/mopidy/mopidy.conf
 printf "done\n"
 
 printf "Vim: "
@@ -77,7 +77,12 @@ printf "done.\n"
 printf "Copy Launchd: "
 ln -sF "$DOTFILES_BASE/launchd/com.colin.icloud.isync.plist" ~/Library/LaunchAgents/com.colin.icloud.isync.plist
 printf "done.\n"
+
 # note to install sshkeys
 # note to install smime keys
 # note to setup keychain passwords
 # note to edit mopidy.conf
+#
+# maybe a s/foo/bar/g style replacement for username, email address, passwords
+# and fullname placeholders are a good idea.
+Maybe 

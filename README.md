@@ -35,6 +35,27 @@ Assuming you have a mac, git, and the usual tools installed:
 
       $ ~/.dotfiles/bin/install_dotfiles.sh
 
+### Create Keychain Passwords
+To avoid storing passwords in plain text, they should be added to keychain so
+that they can be extracted via the security tool. So far the required password
+list includes:
+
+  * iCloud Email:
+
+    $ security add-generic-password -D "email password" -C "mutt" -c "mutt" \
+      -d "email password" -s "IMAP" \
+      -a "EMAILGOESHERE" \
+      -w "PASSWORDGOESHERE"
+
+
+Change out the email/password lines as appropriate.
+
+Unfortunately mopidy does not support a 'password command' option so your
+passwords for spotify, gmusic, etc must be stored plain text on the disk. The
+only protection will come from disk encryption and permissions. For that reason
+the mopidy.conf file is copied rather than symlinked: you won't accidentally
+commit your passwords to the repo and share them on github.
+
 ### Notes
 #### Known Issues
 This is a work in progress. While I have all of this software working nicely
