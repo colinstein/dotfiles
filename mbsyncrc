@@ -7,11 +7,14 @@ PassCmd "security find-generic-password -c 'mutt' -D 'email password' -a 'colins
 SSLType IMAPS
 SSLVersions TLSv1.2
 CertificateFile /usr/local/etc/openssl/cert.pem
+
 IMAPStore icloud-remote
 Account icloud
+
 MaildirStore icloud-local
 Path ~/.mail/icloud/
 Inbox ~/.mail/icloud/Inbox
+
 Channel icloud
 Master :icloud-remote:
 Slave :icloud-local:
