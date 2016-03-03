@@ -334,6 +334,19 @@ else
   printf "skipped.\n"
 fi
 
+printf "Urlview: "
+brew list Urlview > /dev/null 2>&1
+if [[ $? != 0 ]]; then
+  brew install urlview
+  if [[ $? != 0 ]]; then
+    printf "failed!\n"
+  else
+    printf "okay.\n"
+  fi
+else
+  printf "skipped.\n"
+fi
+
 printf "RBEnv: "
 brew list rbenv > /dev/null 2>&1
 if [[ $? != 0 ]]; then

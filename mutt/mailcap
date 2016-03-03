@@ -1,31 +1,31 @@
 # this uses the view_attachment script found in ~/.mutt/view_attachment.sh
 
 # Microsoft Excel
-application/x-msexcel; ~/.mutt/view_attachment.sh %s
-application/ms-exc; ~/.mutt/view_attachment.sh %s
-application/excel; ~/.mutt/view_attachment.sh %s
-application/msexcel; ~/.mutt/view_attachment.sh %s
-application/vnd.ms-exc; ~/.mutt/view_attachment.sh %s
-application/vnd.ms-excel; ~/.mutt/view_attachment.sh %s
+application/x-msexcel; ~/.mutt/bin/view_attachment.sh %s
+application/ms-exc; ~/.mutt/bin/view_attachment.sh %s
+application/excel; ~/.mutt/bin/view_attachment.sh %s
+application/msexcel; ~/.mutt/bin/view_attachment.sh %s
+application/vnd.ms-exc; ~/.mutt/bin/view_attachment.sh %s
+application/vnd.ms-excel; ~/.mutt/bin/view_attachment.sh %s
 
 # Microsoft Word
 # use textedit to open .doc files as it's more light-weight
-application/msword; ~/.mutt/view_attachment.sh %s "-" '/Applications/TextEdit.app'
-application/vnd.openxmlformats-officedocument.wordprocessingml.document; ~/.mutt/view_attachment.sh %s "-" '/Applications/TextEdit.app'
-application/vnd.openxmlformats-officedocument.wordprocessingml.template; ~/.mutt/view_attachment.sh %s "-" '/Applications/TextEdit.app'
+application/msword; ~/.mutt/bin/view_attachment.sh %s "-" '/Applications/TextEdit.app'
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; ~/.mutt/bin/view_attachment.sh %s "-" '/Applications/TextEdit.app'
+application/vnd.openxmlformats-officedocument.wordprocessingml.template; ~/.mutt/bin/view_attachment.sh %s "-" '/Applications/TextEdit.app'
 
 # Images
-image/jpg; ~/.mutt/view_attachment.sh %s jpg
-image/jpeg; ~/.mutt/view_attachment.sh %s jpg
-image/pjpeg; ~/.mutt/view_attachment.sh %s jpg
-image/png; ~/.mutt/view_attachment.sh %s png
-image/gif; ~/.mutt/view_attachment.sh %s gif
+image/jpg; ~/.mutt/bin/view_attachment.sh %s jpg
+image/jpeg; ~/.mutt/bin/view_attachment.sh %s jpg
+image/pjpeg; ~/.mutt/bin/view_attachment.sh %s jpg
+image/png; ~/.mutt/bin/view_attachment.sh %s png
+image/gif; ~/.mutt/bin/view_attachment.sh %s gif
 
 # PDF
-application/pdf; ~/.mutt/view_attachment.sh %s pdf
+application/pdf; ~/.mutt/bin/view_attachment.sh %s pdf
 
 # HTML
 #text/html; ~/.mutt/view_attachment.sh %s html
-text/html;  elinks -force-html -dump-charset utf-8 -dump-width 80 -no-numbering -dump %s; copiousoutput
+text/html;  LC_ALL=C elinks -force-html -dump-width 80 -no-numbering -dump %s; copiousoutput
 # Unidentified.
-application/octet-stream; ~/.mutt/view_attachment.sh %s "-"
+application/octet-stream; ~/.mutt/bin/view_attachment.sh %s "-"

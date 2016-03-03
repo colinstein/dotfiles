@@ -48,7 +48,7 @@ unset mark_old
 unset beep_new
 set pipe_decode
 set thorough_search
-set print_command = "~/.mutt/print.sh"
+set print_command = "~/.mutt/bin/print_message.sh"
 
 # Colours
 source ~/.mutt/themes/mutt-solarized-dark.muttrc
@@ -147,7 +147,7 @@ bind index,pager ZZ quit
 bind index,pager q exit
 
 # Fancy filtering of Message content
-set display_filter = "~/.mutt/display_filter.sh"
+set display_filter = "~/.mutt/bin/display_filter.sh"
 
 # Accounts
 #folder-hook icloud/* source ~/.mutt/accounts/icloud

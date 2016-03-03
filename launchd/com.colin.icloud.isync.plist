@@ -7,7 +7,7 @@
 
     <key>ProgramArguments</key>
     <array>
-      <string>/Users/colin/.mutt/mail_sync.sh</string>
+      <string>/Users/colin/.mutt/bin/mail_sync.sh</string>
     </array>
 
     <key>Nice</key>
