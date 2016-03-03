@@ -92,7 +92,6 @@ ln -sF "$DOTFILES_BASE/bin/mail_sync.sh" ~/.mutt/bin/mail_sync.sh
 ln -sF "$DOTFILES_BASE/bin/print_message.sh" ~/.mutt/bin/print_message.sh
 ln -sF "$DOTFILES_BASE/bin/smime_password.sh" ~/.mutt/bin/smime_password.sh
 ln -sF "$DOTFILES_BASE/bin/view_attachment.sh" ~/.mutt/bin/view_attachment.sh
-ln -sF "$DOTFILES_BASE/bin/url_view.sh" ~/.mutt/bin/url_view.sh
 
 printf "done.\n"
 
