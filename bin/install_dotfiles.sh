@@ -93,16 +93,19 @@ ln -sF "$DOTFILES_BASE/bin/print_message.sh" ~/.mutt/bin/print_message.sh
 ln -sF "$DOTFILES_BASE/bin/smime_password.sh" ~/.mutt/bin/smime_password.sh
 ln -sF "$DOTFILES_BASE/bin/view_attachment.sh" ~/.mutt/bin/view_attachment.sh
 
+smime_keys init
 printf "done.\n"
 
 printf "Copy Launchd: "
 ln -sF "$DOTFILES_BASE/launchd/com.colin.icloud.isync.plist" ~/Library/LaunchAgents/com.colin.icloud.isync.plist
 printf "done.\n"
 
- note to install sshkeys
- note to install smime keys
- note to setup keychain passwords
- note to edit mopidy.conf
+printf "\nThere are a few chores that were not done automatically:\n"
+printf "  1. Copy your ssh-keys to ~/.ssh\n"
+printf "  2. Create passwords for IMAP accounts in keychain.\n"
+printf "  3. Install your SMIME certificate into mutt.\n"
+printf "  4. Edit ~/.config/mopidy/mopidy.conf and add your google-music password.\n"
+printf "\nFor details see the README.md for this repoistory."
 
- maybe a s/foo/bar/g style replacement for username, email address, passwords
- and fullname placeholders are a good idea.
+# maybe a s/foo/bar/g style replacement for username, email address, passwords
+# and fullname placeholders are a good idea.

@@ -56,7 +56,7 @@ source ~/.mutt/themes/mutt-solarized-dark.muttrc
 # Sidebar
 set sidebar_visible = no
 set sidebar_delim = ' | '
-set sidebar_width = 20
+set sidebar_width = 30
 color sidebar_new yellow default
 set sidebar_shortpath = yes
 
