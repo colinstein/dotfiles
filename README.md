@@ -87,6 +87,21 @@ list includes:
 
 Change out the email/password lines as appropriate.
 
+#### Load Launchd configuration
+The extra configurations for Launchd are not loaded automatically because they
+depend on passwords being correctly entered into configuration files. There's a
+small risk that a service will fail without passwords and start refusing new
+connections as a security precaution. Rather than risk confusion about why a
+service is failing, we'll just do this step manually at the end.
+
+  * Setup mopidy:
+
+    $ launchctl load ~/Library/LaunchAgents/homebrew.mopidy.mopidy.plist
+
+  * Setup isync:
+
+    $ launchctl load ~/Library/LaunchAgents/com.colin.icloud.isync.plist
+
 ## Known Issues
 This is a work in progress. While I have all of this software working nicely
 on several computers I've never bothered to automate the install process 100%

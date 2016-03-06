@@ -7,7 +7,7 @@
 
     <key>ProgramArguments</key>
     <array>
-      <string>/Users/colin/.mutt/bin/mail_sync.sh</string>
+      <string>/Users/cstein/.mutt/bin/mail_sync.sh</string>
     </array>
 
     <key>Nice</key>
@@ -18,12 +18,12 @@
 
     <key>RunAtLoad</key>
     <true/>
-    <!--
+
     <key>StandardErrorPath</key>
     <string>/tmp/com.colin.icloud.mbsync.err</string>
 
     <key>StandardOutPath</key>
     <string>/tmp/com.colin.icloud.mbsync.out</string>
-    -->
+
   </dict>
 </plist>
