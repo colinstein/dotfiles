@@ -1,8 +1,6 @@
 # vim: filetype=muttrc
 # make sure that you are using mutt linked against slang, not ncurses, or
 # suffer the consequences of weird color issues. use "mutt -v" to check this.
-# for background in 16 color terminal, valid background colors include:
-# base03, bg, black, any of the non brights
 
 # basic colors ---------------------------------------------------------
 color normal        default    default
