@@ -1,3 +1,2 @@
 #!/bin/bash
-
-echo "I owe you one script that returns passwords for smime keys"
+security find-generic-password -c "mutt" -a "colinstein@me.com" -s "colinstein@me.com 2016 smime" -w

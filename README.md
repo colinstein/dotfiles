@@ -78,6 +78,12 @@ list includes:
       -a "EMAILGOESHERE" \
       -w "PASSWORDGOESHERE"
 
+  * SMIME Keys
+
+    $ security add-generic-password -s "EMAILGOESHERE 2016 smime" \
+      -C "mutt" -c "mutt" -D "MIME" \
+      -a "EMAILGOESHERE" \
+      -w "PASSWORDGOESHERE"
 
 Change out the email/password lines as appropriate.
 
@@ -85,12 +91,6 @@ Change out the email/password lines as appropriate.
 This is a work in progress. While I have all of this software working nicely
 on several computers I've never bothered to automate the install process 100%
 so this repository will evolve over time.
-
-The configuration for SMIME keys in muttrc won't work out of the box. They're
-configured to use the 'password file' flag to allow access to keys but
-`bin/smime_keys.sh` is a shell script. My plan is to pass the password directly
-and use `$(smime_keys.sh)` along wth the password flag instead. Those passwords
-will have to be moved into keychain too.
 
 You can't apply the sidebar and index colour patch in mutt. Those both depend on
 a pristine repository. If I want them to work together I'm going to have to
@@ -142,4 +142,3 @@ line for encrypted, signed, number of attachments, and its spam score.
 
 Flagging messages as spam for icloud to detect also seems like a good use of my
 time even though I don't really have a problem with spam getting through.
-

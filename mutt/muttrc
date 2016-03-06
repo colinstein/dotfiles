@@ -9,11 +9,11 @@ set tmpdir = ~/.mutt/tmp
 
 # S/MIME
 set smime_is_default = yes
-set smime_default_key = "6d2d507a.0"
 set smime_ca_location = /usr/local/etc/openssl/cert.pem
 set smime_keys = ~/.mutt/smime/keys
 set smime_certificates = ~/.mutt/smime/certificates
 set smime_timeout = 300
+set smime_default_key = "6d2d507a.0"
 
 set crypt_autosign = yes
 set crypt_replyencrypt = yes
@@ -27,8 +27,8 @@ set smime_get_cert_email_command  = "openssl x509 -in %f -noout -email"
 set smime_import_cert_command     = "smime_keys add_cert %f"
 
 set smime_encrypt_command         = "openssl smime -encrypt -%a -outform DEF -in %f %c"
-set smime_sign_command            = "openssl smime -sign -signer %c -inkey %k -passin file:/Users/colin/.mutt/smime_password.sh -in %f -certfile %i -outform DER"
-set smime_decrypt_command         = "openssl smime -decrypt -passin file:/Users/colin/.mutt/smime_password.sh -inform DER -in %f -inkey %k -recip %c"
+set smime_sign_command            = "openssl smime -sign -signer %c -inkey %k -passin pass:$(/Users/cstein/.mutt/bin/smime_password.sh) -in %f -certfile %i -outform DER"
+set smime_decrypt_command         = "openssl smime -decrypt -passin pass:$(/Users/cstein/.mutt/bin/smime_password.sh) -inform DER -in %f -inkey %k -recip %c"
 
 set smime_verify_command          = "openssl smime -verify -inform DER -in %s %C -content %f"
 set smime_verify_opaque_command   ="\
