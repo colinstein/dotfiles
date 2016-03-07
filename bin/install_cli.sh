@@ -55,6 +55,19 @@ else
   printf "skipped.\n"
 fi
 
+printf "Aspell: "
+brew list aspell  > /dev/null 2>&1
+if [[ $? != 0 ]]; then
+  brew install aspell
+  if [[ $? != 0 ]]; then
+    printf "failed!\n"
+  else
+    printf "okay.\n"
+  fi
+else
+  printf "skipped.\n"
+fi
+
 printf "Silver Searcher: "
 brew list ag > /dev/null 2>&1
 if [[ $? != 0 ]]; then
@@ -295,7 +308,7 @@ fi
 printf "Weechat: "
 brew list weechat > /dev/null 2>&1
 if [[ $? != 0 ]]; then
-  brew install weechat
+  brew install weechat --with-python --with-perl --with-ruby --with-aspell
   if [[ $? != 0 ]]; then
     printf "failed!\n"
   else
