@@ -17,4 +17,7 @@ fi
 
 alias mailcount="find ~/.mail/ -type f -not -name '.*' | grep -vE ',[^,]*S[^,]*$' | wc -l"
 alias weather="curl -s http://weather.noaa.gov/pub/data/observations/metar/decoded/CYTZ.TXT | sed -n 's/^Temperature\: .* F (\(.*\) C)/\1/p'"
+alias music_reload="launchctl unload ~/Library/LaunchAgents/homebrew.mopidy.mopidy.plist && launchctl load ~/Library/LaunchAgents/homebrew.mopidy.mopidy.plist"
+alias music="ncmpcpp"
+alias chat="weechat"
 
