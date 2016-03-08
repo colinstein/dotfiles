@@ -224,3 +224,8 @@ line for encrypted, signed, number of attachments, and its spam score.
 
 Flagging messages as spam for icloud to detect also seems like a good use of my
 time even though I don't really have a problem with spam getting through.
+
+### Weechat
+All the weechat stuff is stored in ~/.weechat Apart from installing plugins I
+think all that will have to be done manually is installing the token. That whole
+section above needs to be gutted.
