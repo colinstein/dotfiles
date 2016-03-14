@@ -96,6 +96,29 @@ ln -sF "$DOTFILES_BASE/bin/view_attachment.sh" ~/.mutt/bin/view_attachment.sh
 smime_keys init
 printf "done.\n"
 
+
+printf "weechat: "
+mkdir -p ~/.weechat
+ln -sF "$DOTFILES_BASE/weechat/alias.conf" ~/.weechat/alias.conf
+ln -sF "$DOTFILES_BASE/weechat/aspell.conf" ~/.weechat/aspell.conf
+ln -sF "$DOTFILES_BASE/weechat/buffers.conf" ~/.weechat/buffers.conf
+ln -sF "$DOTFILES_BASE/weechat/charset.conf" ~/.weechat/charset.conf
+ln -sF "$DOTFILES_BASE/weechat/colorize_nicks.conf" ~/.weechat/colorize_nicks.conf
+ln -sF "$DOTFILES_BASE/weechat/exec.conf" ~/.weechat/exec.conf
+ln -sF "$DOTFILES_BASE/weechat/irc.conf" ~/.weechat/irc.conf
+ln -sF "$DOTFILES_BASE/weechat/iset.conf" ~/.weechat/iset.conf
+ln -sF "$DOTFILES_BASE/weechat/logger.conf" ~/.weechat/logger.conf
+ln -sF "$DOTFILES_BASE/weechat/relay.conf" ~/.weechat/relay.conf
+ln -sF "$DOTFILES_BASE/weechat/script.conf" ~/.weechat/script.conf
+ln -sF "$DOTFILES_BASE/weechat/sec.conf" ~/.weechat/sec.conf
+ln -sF "$DOTFILES_BASE/weechat/trigger.conf" ~/.weechat/trigger.conf
+ln -sF "$DOTFILES_BASE/weechat/weechat.conf" ~/.weechat/weechat.conf
+ln -sF "$DOTFILES_BASE/weechat/xfer.conf" ~/.weechat/xfer.conf
+
+# This contains a api-slack key so lets copy it instead.
+# cp "$DOTFILES_BASE/weechat/plugins.conf" ~/.weechat/plugins.conf
+printf "done.\n"
+
 printf "Copy Launchd: "
 ln -sF "$DOTFILES_BASE/launchd/com.colin.icloud.isync.plist" ~/Library/LaunchAgents/com.colin.icloud.isync.plist
 printf "done.\n"
@@ -108,4 +131,4 @@ printf "  4. Edit ~/.config/mopidy/mopidy.conf and add your google-music passwor
 printf "\nFor details see the README.md for this repoistory."
 
 # maybe a s/foo/bar/g style replacement for username, email address, passwords
-# and fullname placeholders are a good idea.
+## and fullname placeholders are a good idea.
