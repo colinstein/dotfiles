@@ -118,56 +118,17 @@ be doing this kind of setup by hand. First, start weechat:
 Next you have a handful of commands to run in weechat. Commands in weechat wil
 use the ">" prompt. First we'll get some helpers to manage buffers:
 
-    > /script install buffers.pl buffer_autoclose.py
+    > /script install buffers.pl iset.pl colorize_nicks.py go.py slack_buffer_autoset.py
 
-Then we'll tidy up nicks so they're easier to tell apart:
-
-    > /script iset.pl go.py colorize_nicks.py
-
-Finally, a key-bind to make 'going' to rooms a bit easier.
-
-    > /key bind meta-g /go
-    > /key bind meta-n /bar toggle nicklist
-Now to tidy up the colors a little bit.
-
-    > /set weechat.bar.title.color_bg 0
-    > /set weechat.bar.status.color_bg 0
-    > /set weechat.color.chat_nick_colors 1,2,3,4,5,6
-    > /set buffers.color.hotlist_message_fg 7
-
-And finish by setting the buffer bar to the top like in vim
-
-    > /set weechat.bar.buffers.position top
-    > /set weechat.bar.buffers.items buffers
-
-Then some options to stop all the spam we're likely to get:
-
-    > /set irc.look.smart_filter on
-    > /filter add irc_smart * irc_smart_filter *
-
-And some prettyness icons:
-
-    > /set weechat.look.prefix_same_nick "⤷ "
-    > /set weechat.look.prefix_error "⚠ "
-    > /set weechat.look.prefix_network "ℹ  "
-    > /set weechat.look.prefix_action "⚡ "
-    > /set weechat.look.bar_more_down "▼▼ "
-    > /set weechat.look.bar_more_left "◀◀"
-    > /set weechat.look.bar_more_right "▶▶"
-    > /set weechat.look.bar_more_up "▲▲"
-    > /set weechat.look.prefix_suffix "╡"
-
-And to make some things easier to read:
-
-    > /set weechat.look.prefix_align_max 15
-    > /set weechat.look.buffer_time_format "${253}%H${245}%M"
-
-Finally, head to https://api.slack.com/docs/oauth-test-tokens and generate a
-token for slack. Install the token with:
+Head to https://api.slack.com/docs/oauth-test-tokens and generate a token for
+slack. Install the token with:
 
     > /set plugins.var.python.slack_extension.slack_api_token TOKEN_GOES_HERE
 
 Tokens typically look something like `XOXP-1234567-1234567-1234567-a9a9a9a9a`
+
+Alternatively, you can just go and edit ~/.weechat/plugins.conf and edit the
+token value in there directly.
 
 ## Known Issues
 This is a work in progress. While I have all of this software working nicely

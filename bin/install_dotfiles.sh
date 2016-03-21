@@ -101,6 +101,7 @@ printf "weechat: "
 mkdir -p ~/.weechat
 ln -sF "$DOTFILES_BASE/weechat/alias.conf" ~/.weechat/alias.conf
 ln -sF "$DOTFILES_BASE/weechat/aspell.conf" ~/.weechat/aspell.conf
+ln -sF "$DOTFILES_BASE/weechat/buffer_autoset.conf" ~/.weechat/buffer_autoset.conf
 ln -sF "$DOTFILES_BASE/weechat/buffers.conf" ~/.weechat/buffers.conf
 ln -sF "$DOTFILES_BASE/weechat/charset.conf" ~/.weechat/charset.conf
 ln -sF "$DOTFILES_BASE/weechat/colorize_nicks.conf" ~/.weechat/colorize_nicks.conf
