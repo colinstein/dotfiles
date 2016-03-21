@@ -1,4 +1,3 @@
-set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 
@@ -44,15 +43,16 @@ set autoread
 set mouse=a
 autocmd GUIEnter * set visualbell t_vb=
 
-" let g:solarized_visibility = "high"
-" let g:solarized_contrast = "high"
 colorscheme solarized
 set guifont=Sauce\ Code\ Powerline\ Light:h14
 
-" highlight search results in buffer. ENTER to clear in command mode
+" highlight search results in buffer. ENTER to clear in normal mode
 set hls
 nnoremap <CR> :noh<CR><CR>
 
+" Swapping leader to ',' will break 'reverse last F/f movement' so remap that.
+nnoremap \ ,
+vnoremap \ ,
 let mapleader=","
 let g:mapleader=","
 
@@ -61,6 +61,13 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+" create some splits
+nnoremap <C-w><C-v> :vsplit<cr>
+nnoremap <C-w><C-h> :split<cr>
+vnoremap <C-w><C-v> :vsplit<cr>
+vnoremap <C-w><C-h> :split<cr>
+inoremap <C-w><C-v> :vsplit<cr>
+inoremap <C-w><C-h> :split<cr>
 
 " Create splits with leader - and |
 map <leader>\| :vsplit<cr>
@@ -70,6 +77,9 @@ map <leader>- :split<cr>
 map <leader>i :set list!<cr>
 " Toggle line numbers
 map <leader>n :set invnumber!<cr>
+
+" Show registers
+map <leader>@ :registers<cr>
 
 " Toggle between relative and absolute numbers
 function! LineNumberToggle()
@@ -82,7 +92,6 @@ function! LineNumberToggle()
   endif
 endfunc
 map <leader>r :call LineNumberToggle()<cr>
-
 
 " "Strip trailing whitespace
   function<SID>StripTrailingWhiteSpace()
