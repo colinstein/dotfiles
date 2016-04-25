@@ -8,6 +8,7 @@ export EDITOR='/usr/local/bin/vim'
 export VISUAL='/usr/local/bin/vim'
 export PAGER='less'
 export DEFAULT_USER='cstein'
+export HOMEBREW_NO_ANALYTICS=1
 
 # Language
 if [[ -z "$LANG" ]]; then
