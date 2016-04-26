@@ -18,6 +18,11 @@ mkdir -p ~/.config
 ln -sF "$DOTFILES_BASE/config/htoprc" ~/.config/htoprc
 printf "done.\n"
 
+printf "hub: "
+mkdir -p ~/.config
+cp "$DOTFILES_BASE/config/hub" ~/.config/hub
+printf "done.\n"
+
 printf "mailrc: "
 ln -sF "$DOTFILES_BASE/mailrc" ~/.mailrc
 printf "done.\n"

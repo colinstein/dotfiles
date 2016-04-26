@@ -9,9 +9,9 @@ call vundle#begin()
   Plugin 'kien/ctrlp.vim'
   Plugin 'scrooloose/syntastic'
   Plugin 'majutsushi/tagbar'
-  Plugin 'slim-template/vim-slim'
-  Plugin 'kchmck/vim-coffee-script'
-  Plugin 'tpope/vim-haml'
+"  Plugin 'slim-template/vim-slim'
+"  Plugin 'kchmck/vim-coffee-script'
+"  Plugin 'tpope/vim-haml'
 call vundle#end()
 
 syntax on
