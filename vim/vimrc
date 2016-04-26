@@ -50,17 +50,16 @@ set guifont=Sauce\ Code\ Powerline\ Light:h14
 set hls
 nnoremap <CR> :noh<CR><CR>
 
-" Swapping leader to ',' will break 'reverse last F/f movement' so remap that.
-nnoremap \ ,
-vnoremap \ ,
-let mapleader=","
-let g:mapleader=","
+" Let's try tpace as a leader key
+let mapleader=" "
+let g:mapleader=" "
 
 " navigate splits with ctrl+movement letter
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+
 " create some splits
 nnoremap <C-w><C-v> :vsplit<cr>
 nnoremap <C-w><C-h> :split<cr>
@@ -114,11 +113,8 @@ inoremap<down> <nop>
 inoremap<right> <nop>
 inoremap<left> <nop>
 
-" Nicely open files in windows. %% to expand path for current file
+" %% to expand path for current file
 cnoremap %% <C-R>=expand("%:h").'/'<cr>
-map <leader>ew :e %%
-map <leader>es :sp %%
-map <leader>ev :vsp %%
 
 " Toggle spelling on and off
 nmap <silent> <leader>s :set spell!<cr>
@@ -128,6 +124,7 @@ set spelllang=en_ca
 map <leader>w :set wrap!<cr>
 
 " Airline - a powerline replacement
+" would be nice to get back to regular statusline, not sure how to do buffers
 let g:airline_powerline_fonts=1
 let g:airline#extensions#tabline#enabled=1
 
@@ -141,18 +138,18 @@ map <silent> <S-right> :20winc ><cr>
 map <silent> <S-up> :5winc -<cr>
 map <silent> <S-down> :5winc +
 
-" manage buffers
+" manage buffers - tab buffers probbably isn't ideal. Maybe something like
+" ctrl+shift+n/p. "^^" swaps the last two buffers, maybe
 nnoremap <Tab> :bn<cr>
 nnoremap <S-Tab> :bp<cr>
 map <leader><Tab> :bdelete<cr>
+
 " syntastic warning symbols
 let g:syntastic_warning_symbol = '☆ '
 let g:syntastic_error_symbol = '➤'"
 
 " folding
 set foldmethod=syntax
-nnoremap <Space> za
-vnoremap <Space> zf
 set foldlevelstart=1
 
 " Ctags
