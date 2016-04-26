@@ -35,4 +35,3 @@
   discard = checkout --
   unfuck = !git reset --hard HEAD && git clean -d -f
   graph = log --graph -20 --branches --remotes --tags  --format=format:'%Cgreen%h %Creset• %<(75,trunc)%s (%cN, %cr) %Cred%d' --date-order
-  
