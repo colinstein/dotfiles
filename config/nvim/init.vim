@@ -183,7 +183,7 @@ nnoremap <silent> <leader>@ :registers<cr>
 " Open and switch to files using fuzzy matching
 nnoremap <silent> <leader>t :call fzf#vim#files('', {'options': '--preview-window=up:60% --preview "rougify {}"'}, 1)<cr>
 nnoremap <silent> <Leader>b :Buffers<cr>
-nnoremap <silent> <leader>T :call fzf#vim#tags('', {'options': '--exact --select-1 --exit-0'})<CR>
+nnoremap <silent> <leader>T :Tags<cr>
 nnoremap <silent> <leader>B :BTags<cr>
 
 " Search for words, F to open up Rg, f to search the word under the cursor
