@@ -1,0 +1,17 @@
+Pry.config.pager = false
+Pry.config.correct_indent = false
+
+Pry.config.prompt = proc do |object, _, _|
+  app_name = defined?(Rails.root) ? File.basename(Rails.root) : 'Pry'
+  object_name = object.to_s.split(/#|::/).last
+  object_name = object_name[0..31] + '…' if object_name.length > 32
+  Pry::Helpers::Text.green("#{app_name}/#{object_name}❯ ")
+end
+
+Pry.config.exception_handler = proc do |output, exception, _|
+  output.puts "💣  #{exception.class}: #{exception.message}"
+  exception.backtrace.first(3).each do |line|
+    output.puts "💣   #{line}"
+  end
+end
+

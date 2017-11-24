@@ -1,0 +1,52 @@
+[user]
+  email = colinstein@mac.com
+  name = Colin Stein
+
+[github]
+  name = colinstein
+
+[credential]
+  helper = store
+
+[core]
+  editor = nvim
+  pager = less
+  excludefiles = ~/.config/git/ignore
+
+[push]
+  default = simple
+
+[color "branch"]
+  current = yellow
+  local = green
+  remote = cyan
+
+[color "status"]
+  meta = blue
+  frag = magenta bold
+  old = red
+  new = cyan
+  whitespace = red reverse
+
+[color "status"]
+  added = cyan
+  changed = yellow
+  untracked = red
+
+[diff]
+  tool = nvim -d
+
+[difftool]
+  prompt = false
+
+[alias]
+  mergedprs="!git log origin/production..HEAD --merges --pretty=format:'%s %b' | sed -lE 's/Merge pull request (#[0-9]+) from [^\\/]*\\/([^ ]*) (.*)/\\1 branch: `\\2` PR Description: \\3 /'"
+  branches = branch -a
+  unstage = reset -q HEAD --
+  uncommit = reset --mixed HEAD~
+  discard = checkout --
+  unfuck = !git reset --hard HEAD && git clean -d -f
+  precommit = diff --cached --diff-algorithm=minimal -w
+  graph = log --graph --date-order --remotes --tags --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+  cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
+  stashes = "!git stash list --pretty='%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs'"

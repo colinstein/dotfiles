@@ -1,0 +1,72 @@
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+unsetopt AUTO_CD
+unsetopt CDABLE_VARS
+unsetopt CORRECT
+setopt PUSHD_IGNORE_DUPS
+
+alias ls='/usr/local/bin/gls -F -N --group-directories-first --color=auto'
+alias la='/usr/local/bin/gls -a -N --color=auto'
+alias ll='/usr/local/bin/gls -l -A -N --color=auto'
+alias vim='nvim'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+eval $(gdircolors "$HOME/.dircolors")
+eval "$(goenv init -)"
+chruby 2.4.2
+
+# Generate ctags and cscope files
+function gentags() {
+  case $1 in
+    ctags)
+      ripper-tags -f tags -R --exclude=.git --exclude=log . 2>/dev/null
+      ;;
+    cscope)
+      starscope -e scope 2>/dev/null
+      ;;
+    --help)
+      printf "try: 'gentags [kind]'\n"
+      printf "where [kind] is 'ctags' or 'cscope'\n"
+      printf "defaults to --help\n"
+      ;;
+    *)
+      gentags --help
+      ;;
+  esac
+}
+
+# Extract a public key from a private key
+function public_key() {
+  ssh-keygen -f $1 -y
+}
+
+# Flush DNS settings on macOS
+function flush_dns() {
+  sudo dscacheutil -flushcache
+  sudo killall -HUP mDNSResponder
+}
+
+# Fetch the weather
+function weather () {
+  case $1 in
+    all)
+      command curl -s http://wttr.in/ottawa
+      ;;
+    small)
+      command curl -s http://wttr.in/ottawa | head -n7 | tail -n5
+      ;;
+    today)
+      command curl -s http://wttr.in/ottawa | head -n17 | tail -n15
+      ;;
+    --help)
+      printf "try: 'tv [kind]'\n"
+      printf "where [kind] is 'all', 'small', or 'today' \n"
+      printf "defaults to 'today'.\n"
+      ;;
+    *)
+      weather today
+      ;;
+  esac
+}
