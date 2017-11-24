@@ -1,8 +1,5 @@
 " Under consideration: I'm not sure I want to make these changes yet, but its
 " worth looking at making vim a bit more heavy and seeing how Neovim copes
-"   * Configure omni-completion without deoplete ^X^O
-"   * Change complete sources to use tags, improve ranking of options
-"   * Keybinding for :Lex
 "   * Something to visualize the undo state? Gundotree?
 "   * Fugitive or maybe git-gutter. Particularly with github integration
 "   * Rust Plug-ins: complete, compile, filetype config, etc.
@@ -10,12 +7,9 @@
 "   * Lua Plugins - particularly a linter
 "   * C-plugins - c.vim, possibly doxygen, 
 "   * Git-flavoured markdown maybe something for graphviz and CSVs?
-"   * Ruby-refactoring plug-ins: extract method/variable, inline definition, etc
 "   * Javascript, particularly react and node because we use those apparently?
 "   * HTML/CSS/Javascript plugins - zencoding and the like?
-"   * CScope configuration
-"   * Write up a 'prose' mode (10 columns, centered text, no autocomplete, etc)
-"   * Get `K` working with some sort of command line documentation like Ri
+"   * Write up a 'prose' mode (80 columns, centered text, no autocomplete, etc)
 
 " Automatic plug-in handling
 call plug#begin('~/.local/share/nvim/plugged')
@@ -83,9 +77,10 @@ set undofile                             " Enable saving backups between session
 set spellfile=~/.config/nvim/words.utf-8.add
 set spelllang=en_ca                      " Enable the Canadian English spelling dictionary
 set spell                                " Enable spell checking
-
-" Code indexing
-set tags+=,ruby.tags                     " Expected path for CTags files
+" Expected path for CTags files
+set tags+=,tags
+" Expected default CScope database
+cscope add cscope.out
 
 " Indentation / cursor behaviour
 set autoindent                           " Enable Copy the current line's indent when making a new line
@@ -126,6 +121,9 @@ set signcolumn=yes                       " Enable the display of the sign column
 set wildignorecase                       " Ignore case sensitivity in wildmenu (like tab-completing :commands)
 syntax enable                            " Enable syntax highlighting
 
+" Improve the colors used in CScope windows and the like
+highlight ModeMsg cterm=None ctermfg=5
+
 " Configure some nicer glyphs for 'hidden' characters
 set listchars=tab:▸\ ,eol:¬,trail:·
 
@@ -159,7 +157,7 @@ noremap <silent> ˚ :5winc -<cr>
 noremap <silent> ∆ :5winc +<cr>
 
 " Change the leader key from \ to space
-let mapleader=" "
+let mapleader="\<Space>"
 
 " Create vertical splits with <leader>[-|], they look like the split they create
 map <silent> <leader>\| :vsplit<cr>
@@ -168,6 +166,7 @@ map <silent> <leader>- :split<cr>
 " Manage buffers within a window using <leader> [ for previous, ] for next and \ to close
 nnoremap <silent> <leader>] :bnext<cr>
 nnoremap <silent> <leader>[ :bprev<cr>
+" consider: :b#<bar>bd#<CR>
 nnoremap <silent> <leader>\ <C-w>q
 nnoremap <silent> <leader><BS> :bdelete!<cr>
 
@@ -183,12 +182,15 @@ nnoremap <silent> <leader>@ :registers<cr>
 " Open and switch to files using fuzzy matching
 nnoremap <silent> <leader>t :call fzf#vim#files('', {'options': '--preview-window=up:60% --preview "rougify {}"'}, 1)<cr>
 nnoremap <silent> <Leader>b :Buffers<cr>
-nnoremap <silent> <leader>T :Tags<cr>
+nnoremap <silent> <leader>T :Tags<CR>
 nnoremap <silent> <leader>B :BTags<cr>
 
 " Search for words, F to open up Rg, f to search the word under the cursor
 nnoremap <leader>F :Rg 
 nnoremap <silent> <leader>f :Rg <C-r><C-w><cr>
+
+" Toggle a file explorer
+nnoremap <silent> <leader>e :Lex<cr>
 
 " In command mode expect %% to expand path containing the current file
 cnoremap %% <C-R>=expand("%:h").'/'<cr>
