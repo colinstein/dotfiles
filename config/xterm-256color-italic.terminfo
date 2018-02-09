@@ -1,0 +1,11 @@
+# TERMINFO for xterm-256color with escape sequences for italics.
+# Install with:
+#
+#   tic xterm-256color-italic.terminfo
+#
+# Then export TERM in your .profile:
+#   export TERM=xterm-256color-italic
+#
+xterm-256color-italic|xterm with 256 colors and italic,
+	sitm=\E[3m, ritm=\E[23m,
+	use=xterm-256color,
