@@ -65,8 +65,8 @@ set softtabstop=2                        " Enable inserting 2 spaces when you pr
 set tabstop=8                            " Enable treating Tabs as 8 spaces to keep layout in tabbed files sane
 
 " Backup and Swap
-set backupdir=~/.vim/backup      " Path to store backup files (in case we screw up without real VCS)
-set directory=~/.vim/swap        " Path to store swap files (so we don't pollute other paths)
+set backupdir=~/.vim/backup              " Path to store backup files (in case we screw up without real VCS)
+set directory=~/.vim/swap                " Path to store swap files (so we don't pollute other paths)
 set nobackup                             " Disable backup files (because we use Git for versioning)
 
 " Persistent undo
@@ -108,7 +108,7 @@ set grepformat=%f:%l:%c:%m               " Enable parsing of Ripgrep results (fi
 colorscheme base16-eighties              " Use the Base-16 colour scheme
 let g:netrw_banner=0                     " Disable the Netrw 'chrome'
 set background=dark                      " Enable Vim's 'use colours that look good on dark background' mode
-" set cursorline                           " Enable highlighting the row that the cursor is one
+set cursorline                           " Enable highlighting the row that the cursor is one
 set colorcolumn=80                       " Enable a marker for the 80th column
 set laststatus=2                         " Enable always showing the status line
 set list                                 " Enable the display of 'invisible' characters like Tab, EOL, etc.
@@ -300,7 +300,7 @@ highlight ALEStyleWarningSign ctermfg=03 ctermbg=10
 " Deoplete - auto-completion
 let g:deoplete#enable_at_startup=1       " Enable auto-complete at startup
 let g:deoplete#max_list=20               " Enable maximum of 20 auto-complete suggestions
-let g:deoplete#auto_complete_delay=100   " Enable a 100ms wait before showing auto-complete options
+let g:deoplete#auto_complete_delay=50    " Enable a 50ms wait before showing auto-complete options
 " Use an extra large tags cache for large projects
 let deoplete#tag#cache_limit_size = 50000000
 
@@ -309,7 +309,7 @@ let g:deoplete#sources#omni#input_patterns = {
   \ "ruby" : '[^. *\t]\.\w*\|\h\w*::',
   \ }
 
-" " Modify buffer ranking for auto complete suggestions
+" Modify buffer ranking for auto complete suggestions
 " call deoplete#custom#set('buffer', 'rank', 501)
 
 " Vim-ruby configuration
