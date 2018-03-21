@@ -44,6 +44,7 @@ filetype plugin indent on                " Enable automatic file type detection 
 set autoread                             " Enable automatic reloading of open files edited outside Vim
 set backspace=eol,start,indent           " Enable backspace past end of line, start of edit, etc.
 set clipboard+=unnamed                   " Enable the system clipboard unless a register is specified
+"set formatoptions+=a                     " Enable wrapping as you type
 set hidden                               " Disable unloading of buffers that aren't visible
 set history=1000                         " Enable remembering of 1000 commands, searches, inputs, and expressions
 set mouse=a                              " Enable use of the mouse
@@ -159,7 +160,7 @@ noremap <silent> ∆ :5winc +<cr>
 " Change the leader key from \ to space
 let mapleader="\<Space>"
 
-" Create vertical splits with <leader>[-|], they look like the split they create
+" Create splits with <leader>[-|], they look like the split they create
 map <silent> <leader>\| :vsplit<cr>
 map <silent> <leader>- :split<cr>
 
@@ -179,7 +180,7 @@ nnoremap <silent> <leader>s :set spell!<cr>
 nnoremap <silent> <leader>@ :registers<cr>
 
 " Open and switch to files using fuzzy matching
-nnoremap <silent> <leader>t :call fzf#vim#files('', {'options': '--preview-window=up:60% --preview "pygmentize -f terminal256 -O style=base16-eighties {}"'}, 1)<cr>
+nnoremap <silent> <leader>t :call fzf#vim#files('', {'options': '--preview-window=up:60% --preview "rougify {}"'}, 1)<cr>
 nnoremap <silent> <Leader>b :Buffers<cr>
 nnoremap <silent> <leader>T :Tags<CR>
 nnoremap <silent> <leader>B :BTags<cr>
