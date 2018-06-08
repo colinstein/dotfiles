@@ -257,7 +257,7 @@ function! Rg(...)
 endfunc
 command! -nargs=* Rg call Rg(<f-args>)
 
-" Search command history with Fzf
+" Search command history with Fzf - press : then CTRL+R
 function! s:FzfCommandHistory()
   let s:INTERRUPT = "\u03\u0c" " <C-c><C-l>
   let s:SUBMIT = "\u0d" " <C-m>
@@ -301,7 +301,7 @@ highlight ALEStyleWarningSign ctermfg=03 ctermbg=10
 " Deoplete - auto-completion
 let g:deoplete#enable_at_startup=1       " Enable auto-complete at startup
 let g:deoplete#max_list=20               " Enable maximum of 20 auto-complete suggestions
-let g:deoplete#auto_complete_delay=50    " Enable a 50ms wait before showing auto-complete options
+let g:deoplete#auto_complete_delay=100   " Enable a 50ms wait before showing auto-complete options
 " Use an extra large tags cache for large projects
 let deoplete#tag#cache_limit_size = 50000000
 
@@ -315,9 +315,9 @@ let g:deoplete#sources#omni#input_patterns = {
 
 " Vim-ruby configuration
 " ----------------------
-let g:ruby_indent_access_modifier_style = 'indent'    " Place 'access modifiers' at the same level as method definitions
+let g:ruby_indent_access_modifier_style = 'normal'    " Place 'access modifiers' at the same level as method definitions
 let g:ruby_indent_block_style = 'do'                  " Always indent one level inside of a block
-let g:ruby_indent_assignment_style = 'variable'       " when doing conditional assignment with 'if', don't to the = symbol
+let g:ruby_indent_assignment_style = 'begin'          " Variable assignment lines up on the 'leftmost' column not the = sign
 let ruby_spellcheck_strings = 1                       " Enable spell-checking inside strings
 
 " Neosnippets - tiny text templates
@@ -338,4 +338,8 @@ augroup filetype_ruby
   autocmd!
   autocmd BufNewFile,BufRead ruby setlocal expandtab tabstop=8 shiftwidth=2 softtabstop=2
   autocmd BufNewFile,BufRead ruby setlocal g:fzf_tags_command = 'ripper-tags --fields=+n -f'
+augroup END
+
+" Fix the tendency for netrw to leave unmodified buffers open
+autocmd FileType netrw setl bufhidden=delete
 augroup END
