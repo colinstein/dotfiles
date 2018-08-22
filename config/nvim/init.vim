@@ -17,8 +17,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     UpdateRemotePlugins
   endfunction
   Plug '/usr/local/opt/fzf'                                       " Quick searching for files
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }   " Auto-complete/suggestion pop-up
-  Plug 'Shougo/neosnippet'                                        " Snippets - like tiny templates for code
+  Plug 'lifepillar/vim-mucomplete'                                " A very light-weight completion plugin
   Plug 'chriskempson/base16-vim'                                  " Pretty colours
   Plug 'junegunn/fzf.vim'                                         " More FZF, additional Vim power
   Plug 'w0rp/ale'                                                 " Linting in the gutter
@@ -28,15 +27,19 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'machakann/vim-sandwich'                                   " Simplify addition, change of pairs of characters like brackets and quotes
   Plug 'tpope/vim-commentary'                                     " Better handling of code comments. Toggle with 'gc' or run :Commentary
   Plug 'tpope/vim-endwise'                                        " Automatic insert of 'end' pairs like 'endfunc', 'fi', end', in Ruby, zsh, vim, etc.
-
+  Plug 'rickhowe/diffchar.vim'                                    " Improvements to diff mode showing exact changes in lines
   " Some plug-ins unique to Ruby development
-  Plug 'uplus/deoplete-solargraph', { 'for': 'ruby' }             " Code completion for ruby, requires Solargraph (see the readme)
   Plug 'tpope/vim-rails',           { 'for': 'ruby' }             " Improved rails highlighting, helpers, etc.
   Plug 'vim-ruby/vim-ruby',         { 'for': 'ruby' }             " Improved ruby syntax highlighting navigation and spell checking
 
   " Some plug-ins unique to Golang development
   Plug 'fatih/vim-go'                                             " Improved syntax highlighting, folding, renaming ,linting, etc
-  Plug 'zchee/deoplete-go', { 'do': 'make'}                       " Code complete helper, depends on nsf/gocode
+
+  " Some more complicated auto completion stuff I'm not convinced are worth the complexity
+  " Plug 'zchee/deoplete-go', { 'do': 'make'}                       " Code complete helper, depends on nsf/gocode
+  " Plug 'uplus/deoplete-solargraph', { 'for': 'ruby' }             " Code completion for ruby, requires Solargraph (see the readme)
+  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }   " Auto-complete/suggestion pop-up
+  " Plug 'Shougo/neosnippet'                                        " Snippets - like tiny templates for code
 call plug#end()
 
 " Generic editor options
@@ -123,7 +126,13 @@ set wildignorecase                       " Ignore case sensitivity in wildmenu (
 syntax enable                            " Enable syntax highlighting
 
 " Improve the colors used in CScope windows and the like
-highlight ModeMsg cterm=None ctermfg=5
+highlight ModeMsg cterm=NONE ctermfg=5
+
+" Set some Make spelling issues a little less colourful
+highlight SpellBad cterm=underline ctermbg=0
+highlight SpellRare cterm=none ctermbg=0
+highlight SpellLocal cterm=none ctermbg=0
+highlight SpellCap cterm=none ctermbg=0
 
 " Configure some nicer glyphs for 'hidden' characters
 set listchars=tab:▸\ ,eol:¬,trail:·
@@ -180,7 +189,7 @@ nnoremap <silent> <leader>s :set spell!<cr>
 nnoremap <silent> <leader>@ :registers<cr>
 
 " Open and switch to files using fuzzy matching
-nnoremap <silent> <leader>t :call fzf#vim#files('', {'options': '--preview-window=up:60% --preview "rougify {}"'}, 1)<cr>
+nnoremap <silent> <leader>t :call fzf#vim#files('', {'options': '--preview-window=up:60% --preview "cat {}"'}, 1)<cr>
 nnoremap <silent> <Leader>b :Buffers<cr>
 nnoremap <silent> <leader>T :Tags<CR>
 nnoremap <silent> <leader>B :BTags<cr>
@@ -199,10 +208,16 @@ cnoremap %% <C-R>=expand("%:h").'/'<cr>
 cnoremap <expr> <C-r> <SID>FzfCommandHistory()
 
 " Toggle snippet expansions with tab, otherwise cycle auto-complete suggestions
-imap <expr><TAB>
-  \ neosnippet#expandable_or_jumpable() ?
-  \ "\<Plug>(neosnippet_expand_or_jump)" :
-  \ pumvisible() ? "\<C-n>" : "\<TAB>"
+" imap <expr><TAB>
+"   \ neosnippet#expandable_or_jumpable() ?
+"   \ "\<Plug>(neosnippet_expand_or_jump)" :
+"   \ pumvisible() ? "\<C-n>" : "\<TAB>"
+
+" Mu-completion
+let g:mucomplete#chains = {}
+let g:mucomplete#chains.default  = ['omni', 'c-p']
+let g:mucomplete#chains.markdown = ['keyp', 'keyn', 'dict', 'uspl']
+let g:mucomplete#chains.ruby = ['tags', 'c-p', 'uspl']
 
 " Create a custom status-line
 set statusline=%<                                        " Where to truncate the file name
@@ -299,16 +314,16 @@ highlight ALEStyleErrorSign   ctermfg=03 ctermbg=10
 highlight ALEStyleWarningSign ctermfg=03 ctermbg=10
 
 " Deoplete - auto-completion
-let g:deoplete#enable_at_startup=1       " Enable auto-complete at startup
-let g:deoplete#max_list=20               " Enable maximum of 20 auto-complete suggestions
-let g:deoplete#auto_complete_delay=100   " Enable a 50ms wait before showing auto-complete options
+" let g:deoplete#enable_at_startup=1       " Enable auto-complete at startup
+" let g:deoplete#max_list=20               " Enable maximum of 20 auto-complete suggestions
+" let g:deoplete#auto_complete_delay=100   " Enable a 50ms wait before showing auto-complete options
 " Use an extra large tags cache for large projects
-let deoplete#tag#cache_limit_size = 50000000
+" let deoplete#tag#cache_limit_size = 50000000
 
-" Configure some auto-completion trigger patterns
-let g:deoplete#sources#omni#input_patterns = {
-  \ "ruby" : '[^. *\t]\.\w*\|\h\w*::',
-  \ }
+" " Configure some auto-completion trigger patterns
+" let g:deoplete#sources#omni#input_patterns = {
+"   \ "ruby" : '[^. *\t]\.\w*\|\h\w*::',
+"   \ }
 
 " Modify buffer ranking for auto complete suggestions
 " call deoplete#custom#set('buffer', 'rank', 501)
@@ -342,15 +357,14 @@ augroup END
 
 " Fix the tendency for netrw to leave unmodified buffers open
 autocmd FileType netrw setl bufhidden=delete
-augroup END
 
 " By default Vimdif has some pretty terrible colours. This should it sane. It's a bit of a work in progress
 if &diff
-  highlight Normal      cterm=NONE    ctermfg=08    ctermbg=0
-  highlight DiffDelete  cterm=NONE    ctermfg=01    ctermbg=0
-  highlight DiffAdd     cterm=NONE    ctermfg=02    ctermbg=0
-  highlight DiffText    cterm=NONE    ctermfg=03    ctermbg=0
-  highlight DiffChange  cterm=NONE    ctermfg=09    ctermbg=0
+  highlight Normal      cterm=none    ctermfg=08    ctermbg=0
+  highlight DiffDelete  cterm=none    ctermfg=01    ctermbg=0
+  highlight DiffAdd     cterm=none    ctermfg=02    ctermbg=0
+  highlight DiffText    cterm=none    ctermfg=03    ctermbg=0
+  highlight DiffChange  cterm=none    ctermfg=09    ctermbg=0
   set nospell
   set wrap
   let g:diff_translations = 0
@@ -358,6 +372,7 @@ if &diff
   set syntax=diff
   set diffopt+=iwhite
   set diffexpr=""
+  set colorcolumn=0
   autocmd FilterWritePre * if &diff | setlocal wrap< | set syntax=diff | set nofoldenable | set filetype=text | endif
   " ZZ to bale out of 'vimdiff' (nvim -d)
   nnoremap ZZ :qa!<cr>
