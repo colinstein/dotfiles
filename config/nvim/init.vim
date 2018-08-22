@@ -343,3 +343,25 @@ augroup END
 " Fix the tendency for netrw to leave unmodified buffers open
 autocmd FileType netrw setl bufhidden=delete
 augroup END
+
+" By default Vimdif has some pretty terrible colours. This should it sane. It's a bit of a work in progress
+if &diff
+  highlight Normal      cterm=NONE    ctermfg=08    ctermbg=0
+  highlight DiffDelete  cterm=NONE    ctermfg=01    ctermbg=0
+  highlight DiffAdd     cterm=NONE    ctermfg=02    ctermbg=0
+  highlight DiffText    cterm=NONE    ctermfg=03    ctermbg=0
+  highlight DiffChange  cterm=NONE    ctermfg=09    ctermbg=0
+  set nospell
+  set wrap
+  let g:diff_translations = 0
+  set filetype=text
+  set syntax=diff
+  set diffopt+=iwhite
+  set diffexpr=""
+  autocmd FilterWritePre * if &diff | setlocal wrap< | set syntax=diff | set nofoldenable | set filetype=text | endif
+  " ZZ to bale out of 'vimdiff' (nvim -d)
+  nnoremap ZZ :qa!<cr>
+end
+
+" Jesus saves
+command! Jesus w
