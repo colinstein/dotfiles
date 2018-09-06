@@ -358,7 +358,8 @@ augroup END
 " Fix the tendency for netrw to leave unmodified buffers open
 autocmd FileType netrw setl bufhidden=delete
 
-" By default Vimdif has some pretty terrible colours. This should it sane. It's a bit of a work in progress
+" By default Vimdif has some pretty terrible colours. This should make it more sane.
+" It's a bit of a work in progress
 if &diff
   highlight Normal      cterm=none    ctermfg=08    ctermbg=0
   highlight DiffDelete  cterm=none    ctermfg=01    ctermbg=0
