@@ -34,7 +34,10 @@
   untracked = red
 
 [diff]
-  tool = nvim -d
+  tool = nvimdiff
+
+[difftool "nvimdiff"]
+  cmd = "nvim -R -d -u ~/.config/nvim/init.vim \"$REMOTE\" \"$LOCAL\""
 
 [difftool]
   prompt = false
