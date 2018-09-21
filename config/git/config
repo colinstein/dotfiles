@@ -53,4 +53,4 @@
   graph = log --graph --date-order --remotes --tags --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
   cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
   stashes = "!git stash list --pretty='%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs'"
-  llog = log --pretty=format:'[%Cblue%an%Creset] %h %Cgreen%s%Creset' --numstat --reverse
+  branchlog = log --pretty=format:'[%Cblue%an%Creset] %h %Cgreen%s%Creset' --numstat --reverse master..
