@@ -103,35 +103,36 @@ key_bindings:
   - { key: V, mods: Command, action: Paste }
   - { key: C, mods: Command, action: Copy }
   - { key: Q, mods: Command, action: Quit }
-  # manage splits
+  # make splits with cmd+(shift)+d like iterm
   - { key: D, mods: Command|Shift, chars: "\x01\x2d" }
   - { key: D, mods: Command, chars: "\x01\x7c" }
+  # close panes with cmd+w like iterm
   - { key: W, mods: Command, chars: "\x01\x77" }
-  # make tabs
+  # make new 'tabs' with cmd+t like iterm
   - { key: T, mods: Command, chars: "\x01\x63" }
-  # clear window
+  # clean the current pane with cmd+k like iterm
   - { key: K, mods: Command, chars: "\x01\x6b" }
 
-  # navigate 'tabs'
+  # navigate 'tabs'with cmd+shfit+left/right arrows (swaping tabs with panes for iterm)
   - { key: Left, mods: Command|Shift, chars: "\x01\x70" }
   - { key: Right, mods: Command|Shift, chars: "\x01\x6e" }
 
-    # navigate panes
+  # navigate panes with cmd+arrow keys (swaping tabs with panes for iterm)
   - { key: Left, mods: Command, chars: "\x01\x1b\x5b\x44" }
   - { key: Right, mods: Command, chars: "\x01\x1b\x5b\x43" }
   - { key: Up, mods: Command, chars: "\x01\x1b\x5b\x41" }
   - { key: Down, mods: Command, chars: "\x01\x1b\x5b\x42" }
 
-  # zoom pane toggle
+  # zoom a pane with cmd+shift+enter like iterm
   - { key: Return, mods: Command|Shift, chars: "\x01\x7a" }
 
-  # resize
-  # big up
-  # small up
-  # big left
-  # small left
-  
-  # move splits around
+  # resize panes with cmd+option+arrows
+  - { key: Left, mods: Command|Option, chars: "\x01\x1b\x5b\x31\x3b\x33\x44" }
+  - { key: Right, mods: Command|Option, chars: "\x01\x1b\x5b\x31\x3b\x33\x43" }
+  - { key: Up, mods: Command|Option, chars: "\x01\x1b\x5b\x31\x3b\x33\x41" }
+  - { key: Down, mods: Command|Option, chars: "\x01\x1b\x5b\x31\x3b\x33\x42" }
+
+  # move - cmd-ctrl-arrows?
 
   - { key: Key0,     mods: Command, action: ResetFontSize                }
   - { key: Equals,   mods: Command, action: IncreaseFontSize             }
