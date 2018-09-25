@@ -46,6 +46,7 @@
   mergedprs="!git log origin/production..HEAD --merges --pretty=format:'%s %b' | sed -lE 's/Merge pull request (#[0-9]+) from [^\\/]*\\/([^ ]*) (.*)/\\1 branch: `\\2` PR Description: \\3 /'"
   branches = branch -a
   unstage = reset -q HEAD --
+  fuckit = "!git . && git commit -m 'YOLO' && git push origin head -f"
   uncommit = reset --mixed HEAD~
   discard = checkout --
   unfuck = !git reset --hard HEAD && git clean -d -f
