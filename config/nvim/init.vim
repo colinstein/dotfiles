@@ -10,6 +10,7 @@
 "   * Javascript, particularly react and node because we use those apparently?
 "   * HTML/CSS/Javascript plugins - zencoding and the like?
 "   * Write up a 'prose' mode (80 columns, centered text, no autocomplete, etc)
+"   * Consider NCM2 as an alternative to deoplete et al.
 
 " Automatic plug-in handling
 call plug#begin('~/.local/share/nvim/plugged')
@@ -17,13 +18,11 @@ call plug#begin('~/.local/share/nvim/plugged')
     UpdateRemotePlugins
   endfunction
   Plug '/usr/local/opt/fzf'                                       " Quick searching for files
-  Plug 'lifepillar/vim-mucomplete'                                " A very light-weight completion plugin
   Plug 'chriskempson/base16-vim'                                  " Pretty colours
   Plug 'junegunn/fzf.vim'                                         " More FZF, additional Vim power
   Plug 'w0rp/ale'                                                 " Linting in the gutter
 
   " Some plug-ins that are generally useful for many programming languages
-  Plug 'jiangmiao/auto-pairs'                                     " Automatic insertion/deletion of matching pairs of brackets and quotes
   Plug 'machakann/vim-sandwich'                                   " Simplify addition, change of pairs of characters like brackets and quotes
   Plug 'tpope/vim-commentary'                                     " Better handling of code comments. Toggle with 'gc' or run :Commentary
   Plug 'tpope/vim-endwise'                                        " Automatic insert of 'end' pairs like 'endfunc', 'fi', end', in Ruby, zsh, vim, etc.
@@ -35,11 +34,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Some plug-ins unique to Golang development
   Plug 'fatih/vim-go'                                             " Improved syntax highlighting, folding, renaming ,linting, etc
 
-  " Some more complicated auto completion stuff I'm not convinced are worth the complexity
-  " Plug 'zchee/deoplete-go', { 'do': 'make'}                       " Code complete helper, depends on nsf/gocode
-  " Plug 'uplus/deoplete-solargraph', { 'for': 'ruby' }             " Code completion for ruby, requires Solargraph (see the readme)
-  " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }   " Auto-complete/suggestion pop-up
-  " Plug 'Shougo/neosnippet'                                        " Snippets - like tiny templates for code
 call plug#end()
 
 " Generic editor options
@@ -83,8 +77,20 @@ set spelllang=en_ca                      " Enable the Canadian English spelling 
 set spell                                " Enable spell checking
 " Expected path for CTags files
 set tags+=,tags
-" Expected default CScope database
-cscope add cscope.out
+
+function! LoadCscope()
+  let db = findfile("cscope.out", ".;")
+  if (!empty(db))
+    let path = strpart(db, 0, match(db, "/cscope.out$"))
+    set nocscopeverbose " suppress 'duplicate connection' error
+    exe "cs add " . db . " " . path
+    set cscopeverbose
+  " else add the database pointed to by environment variable 
+  elseif $CSCOPE_DB != "" 
+    cs add $CSCOPE_DB
+  endif
+endfunction
+command LoadCscope call LoadCscope()
 
 " Indentation / cursor behaviour
 set autoindent                           " Enable Copy the current line's indent when making a new line
@@ -109,10 +115,10 @@ set grepprg=rg\ --vimgrep\ --no-heading  " Enable the use of Ripgrep for searchi
 set grepformat=%f:%l:%c:%m               " Enable parsing of Ripgrep results (filename:line:column:match)
 
 " Color and appearance
-colorscheme base16-eighties              " Use the Base-16 colour scheme
+colorscheme base16-onedark               " Use the Base-16 colour scheme
 let g:netrw_banner=0                     " Disable the Netrw 'chrome'
 set background=dark                      " Enable Vim's 'use colours that look good on dark background' mode
-set cursorline                           " Enable highlighting the row that the cursor is one
+"set cursorline                           " Enable highlighting the row that the cursor is one
 set colorcolumn=80                       " Enable a marker for the 80th column
 set laststatus=2                         " Enable always showing the status line
 set list                                 " Enable the display of 'invisible' characters like Tab, EOL, etc.
@@ -127,6 +133,10 @@ syntax enable                            " Enable syntax highlighting
 
 " Improve the colors used in CScope windows and the like
 highlight ModeMsg cterm=NONE ctermfg=5
+" Simplify spelling errors to underlines
+highlight SpellBad cterm=underline
+highlight clear SpellCap
+highlight clear SpellRare
 
 " Set some Make spelling issues a little less colourful
 highlight SpellBad cterm=underline ctermbg=0
@@ -295,6 +305,15 @@ function! GrepQuickFix(pat)
 endfunction
 command! -nargs=* GrepQF call GrepQuickFix(<q-args>)
 
+" Quick and dirty 'extract an assignment line to method' call
+function! RubyExtractMethod()
+  norm mm
+  :s/\s*\(\w*\)\s*=\(.*\)/\1\rdef \1\r  \2\rend\r/
+  norm k"idam[m"iPkvam=`m==$
+endfunction
+command! -nargs=* REM call RubyExtractMethod()
+
+
 " Plug-in configuration
 " ---------------------
 " ALE - Linting
@@ -312,7 +331,9 @@ highlight ALEWarningSign      ctermfg=03 ctermbg=10
 highlight ALEInfoSign         ctermfg=04 ctermbg=10
 highlight ALEStyleErrorSign   ctermfg=03 ctermbg=10
 highlight ALEStyleWarningSign ctermfg=03 ctermbg=10
-
+let g:ale_fixers = {
+\   'ruby': ['rubocop'],
+\}
 " Deoplete - auto-completion
 " let g:deoplete#enable_at_startup=1       " Enable auto-complete at startup
 " let g:deoplete#max_list=20               " Enable maximum of 20 auto-complete suggestions
@@ -358,8 +379,7 @@ augroup END
 " Fix the tendency for netrw to leave unmodified buffers open
 autocmd FileType netrw setl bufhidden=delete
 
-" By default Vimdif has some pretty terrible colours. This should make it more sane.
-" It's a bit of a work in progress
+" By default Vimdif has some pretty terrible colours. This should it sane. It's a bit of a work in progress
 if &diff
   highlight Normal      cterm=none    ctermfg=08    ctermbg=0
   highlight DiffDelete  cterm=none    ctermfg=01    ctermbg=0
