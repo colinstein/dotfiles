@@ -127,16 +127,24 @@ key_bindings:
   - { key: Return, mods: Command|Shift, chars: "\x01\x7a" }
 
   # resize panes with cmd+option+arrows
-  - { key: Left, mods: Command|Option, chars: "\x01\x1b\x5b\x31\x3b\x33\x44" }
-  - { key: Right, mods: Command|Option, chars: "\x01\x1b\x5b\x31\x3b\x33\x43" }
-  - { key: Up, mods: Command|Option, chars: "\x01\x1b\x5b\x31\x3b\x33\x41" }
-  - { key: Down, mods: Command|Option, chars: "\x01\x1b\x5b\x31\x3b\x33\x42" }
+  - { key: Left, mods: Option, chars: "\x01\x1b\x5b\x31\x3b\x33\x44" }
+  - { key: Right, mods: Option, chars: "\x01\x1b\x5b\x31\x3b\x33\x43" }
+  - { key: Up, mods: Option, chars: "\x01\x1b\x5b\x31\x3b\x33\x41" }
+  - { key: Down, mods: Option, chars: "\x01\x1b\x5b\x31\x3b\x33\x42" }
 
-  # move - cmd-ctrl-arrows?
+  # reposition panes using opt+arrows left/right
+  - { key: Left, mods: Command|Option, chars: "\x01\x7b" }
+  - { key: Right, mods: Command|Option, chars: "\x01\x7d" }
+  # move pane to new window with up arrow
+  - { key: Up, mods: Command|Option, chars: "\x01\x21" }
+  - { key: Down, mods: Command|Option, chars: "\x01\x6a" }
 
+  # Modify font size
   - { key: Key0,     mods: Command, action: ResetFontSize                }
   - { key: Equals,   mods: Command, action: IncreaseFontSize             }
   - { key: Minus,    mods: Command, action: DecreaseFontSize             }
+
+    # ordinary keys
   - { key: Home,                    chars: "\x1bOH",   mode: AppCursor   }
   - { key: Home,                    chars: "\x1b[H",   mode: ~AppCursor  }
   - { key: End,                     chars: "\x1bOF",   mode: AppCursor   }
