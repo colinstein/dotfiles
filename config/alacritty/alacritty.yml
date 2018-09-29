@@ -137,6 +137,17 @@ key_bindings:
   # zoom a pane with cmd+shift+enter like iterm
   - { key: Return, mods: Command|Shift, chars: "\x02\x7a" }
 
+  # macOS plays an error noise with command+control+(down|left|right)
+  # It's a weird quirk of the OS that impacts many applications. The fix
+  # is to create ~/Library/KeyBindings/DefaultKeyBinding.dict
+  # and add to it the following:
+  #
+  # {
+  #     "^@\UF701" = "noop:";
+  #     "^@\UF702" = "noop:";
+  #     "^@\UF703" = "noop:";
+  # }
+  #
   # resize panes with cmd+control+arrows - these need tmux.conf changes
   - { key: Left, mods: Command|Control, chars: "\x02\x1b\x5b\x31\x3b\x33\x44" }
   - { key: Right, mods: Command|Control, chars: "\x02\x1b\x5b\x31\x3b\x33\x43" }
