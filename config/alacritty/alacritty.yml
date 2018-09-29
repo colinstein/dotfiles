@@ -106,37 +106,47 @@ colors:
 
 # use `xxd -psd` to generate key-codes
 key_bindings:
+  - { key: Key1, mods: Command, chars: "\x02\x31" }
+  - { key: Key2, mods: Command, chars: "\x02\x32" }
+  - { key: Key3, mods: Command, chars: "\x02\x33" }
+  - { key: Key4, mods: Command, chars: "\x02\x34" }
+  - { key: Key5, mods: Command, chars: "\x02\x35" }
+  - { key: Key6, mods: Command, chars: "\x02\x36" }
+  - { key: Key7, mods: Command, chars: "\x02\x37" }
+  - { key: Key8, mods: Command, chars: "\x02\x38" }
+  - { key: Key9, mods: Command, chars: "\x02\x39" }
   - { key: V, mods: Command, action: Paste }
   - { key: C, mods: Command, action: Copy }
   - { key: Q, mods: Command, action: Quit }
-  # make splits with cmd+(shift)+d like iterm
   - { key: D, mods: Command|Shift, chars: "\x02\x22" }
   - { key: D, mods: Command, chars: "\x02\x25" }
-  # close panes with cmd+w like iterm
   - { key: W, mods: Command, chars: "\x02\x78" }
-  # make new 'tabs' with cmd+t like iterm
   - { key: T, mods: Command, chars: "\x02\x63" }
-  # clean the current pane with cmd+k like iterm
   - { key: K, mods: Command, chars: "\x02\x6b" }
+  - { key: Return, mods: Command|Shift, chars: "\x02\x7a" }
+  - { key: C, mods: Command|Shift, chars: "\x02\x5b" }
+  - { key: F, mods: Command, chars: "\x02\x2f" }
+  - { key: Key0,     mods: Command, action: ResetFontSize                }
+  - { key: Equals,   mods: Command, action: IncreaseFontSize             }
+  - { key: Minus,    mods: Command, action: DecreaseFontSize             }
+  - { key: E, mods: Command|Option, chars: "\x02\x73" }
 
-  # navigate 'tabs'with cmd+left/right arrows
+  - { key: LBracket, mods: Command|Shift, chars: "\x02\x70" } # navigate windows left
+  - { key: RBracket, mods: Command|Shift, chars: "\x02\x6e" } # navigate windows right
+  - { key: LBracket, mods: Command, chars: "\x02\x4f" } # navigate panes left
+  - { key: RBracket, mods: Command, chars: "\x02\x6f" } # navigate panes right
+
   - { key: Left, mods: Command, chars: "\x02\x70" }
   - { key: Right, mods: Command, chars: "\x02\x6e" }
-  - { key: LBracket, mods: Command|Shift, chars: "\x02\x70" }
-  - { key: RBracket, mods: Command|Shift, chars: "\x02\x6e" }
+  - { key: Up, mods: Command, chars: "\x02\x21" } # tmux promote pane to window - maybe should be shift?
+  - { key: Down, mods: Command, chars: "\x02\x6a" } # tmux send to pane - needs a : for some rason, maybe just set it? = maybe should be shift?
 
-  # navigate panes with cmd+arrow keys (swaping tabs with panes for iterm)
-  - { key: Left, mods: Command|Shift, chars: "\x02\x1b\x5b\x44" }
-  - { key: Right, mods: Command|Shift, chars: "\x02\x1b\x5b\x43" }
-  - { key: Up, mods: Command|Shift, chars: "\x02\x1b\x5b\x41" }
-  - { key: Down, mods: Command|Shift, chars: "\x02\x1b\x5b\x42" }
-  # Cycle back is "last used" rather than going around backward in a cycle
-  # - { key: LBracket, mods: Command, chars: "\x02\x3b" }
-  # - { key: RBracket, mods: Command, chars: "\x02\x6f" }
+  - { key: Left, mods: Command|Option, chars: "\x02\x1b\x5b\x44" }
+  - { key: Right, mods: Command|Option, chars: "\x02\x1b\x5b\x43" }
+  - { key: Up, mods: Command|Option, chars: "\x02\x1b\x5b\x41" }
+  - { key: Down, mods: Command|Option, chars: "\x02\x1b\x5b\x42" }
 
-  # zoom a pane with cmd+shift+enter like iterm
-  - { key: Return, mods: Command|Shift, chars: "\x02\x7a" }
-
+  # resize panes with cmd+control+arrows
   # macOS plays an error noise with command+control+(down|left|right)
   # It's a weird quirk of the OS that impacts many applications. The fix
   # is to create ~/Library/KeyBindings/DefaultKeyBinding.dict
@@ -148,53 +158,19 @@ key_bindings:
   #     "^@\UF703" = "noop:";
   # }
   #
-  # resize panes with cmd+control+arrows - these need tmux.conf changes
   - { key: Left, mods: Command|Control, chars: "\x02\x1b\x5b\x31\x3b\x33\x44" }
   - { key: Right, mods: Command|Control, chars: "\x02\x1b\x5b\x31\x3b\x33\x43" }
   - { key: Up, mods: Command|Control, chars: "\x02\x1b\x5b\x31\x3b\x33\x41" }
   - { key: Down, mods: Command|Control, chars: "\x02\x1b\x5b\x31\x3b\x33\x42" }
 
-  # Modify font size
-  - { key: Key0,     mods: Command, action: ResetFontSize                }
-  - { key: Equals,   mods: Command, action: IncreaseFontSize             }
-  - { key: Minus,    mods: Command, action: DecreaseFontSize             }
+  - { key: Semicolon, mods: Command|Shift, chars: "\x02\x3a" } # tmux command mode
+  - { key: R, mods: Command, chars: "\x02\x2c" } # tmux rename tab
+  - { key: P, mods: Command, chars: "\x02\x71" } # tmux jump pane number
 
-  # CMD+SHIFT+C for copy mode, move with vi keys, space to mark text
-  - { key: C, mods: Command|Shift, chars: "\x02\x5b" }
-
-  # CMD+F for search
-  - { key: F, mods: Command, chars: "\x02\x2f" }
-
-  # CMD+Number to jump to a tab
-  - { key: Key1, mods: Command, chars: "\x02\x31" }
-  - { key: Key2, mods: Command, chars: "\x02\x32" }
-  - { key: Key3, mods: Command, chars: "\x02\x33" }
-  - { key: Key4, mods: Command, chars: "\x02\x34" }
-  - { key: Key5, mods: Command, chars: "\x02\x35" }
-  - { key: Key6, mods: Command, chars: "\x02\x36" }
-  - { key: Key7, mods: Command, chars: "\x02\x37" }
-  - { key: Key8, mods: Command, chars: "\x02\x38" }
-  - { key: Key9, mods: Command, chars: "\x02\x39" }
-
-  # Input broadcasting with CMD+CTRL+SHIFT+I
-  #
-  # tmux command mode
-  - { key: Semicolon, mods: Command|Shift, chars: "\x02\x3a" }
-  # tmux rename tab
-  - { key: R, mods: Command, chars: "\x02\x2c" }
-  # tmux jump pane number
-  - { key: P, mods: Command, chars: "\x02\x71" }
-
-  # tmux relocate panes. Change these to rotate left and right.
-  - { key: Left, mods: Command|Option, chars: "\x02\x7b" }
-  - { key: Right, mods: Command|Option, chars: "\x02\x7d" }
-  # Tmux promote/demote session to window/pane
-  - { key: Up, mods: Command|Option, chars: "\x02\x21" }
-  - { key: Down, mods: Command|Option, chars: "\x02\x6a" }
-  # You need a binding for ^as - it's "lit" as the kids would say
-
-  # 'expose' kind makes sense as choosing from all the things right?
-  - { key: E, mods: Command|Option, chars: "\x02\x73" }
+  - { key: Left, mods: Command|Shift, chars: "\x02\x7b" } # swap with pane left
+  - { key: Right, mods: Command|Shift, chars: "\x02\x7d" } # swap with pane right
+  - { key: Up, mods: Command|Shift, chars: "\x02\x21" } # tmux promote pane to window - maybe should be shift?
+  - { key: Down, mods: Command|Shift, chars: "\x02\x6a\x3a" } # tmux send to pane - needs a : for some rason, maybe just set it? = maybe should be shift?
 
   # ordinary keys
   - { key: Home,                    chars: "\x1bOH",   mode: AppCursor   }
