@@ -1,5 +1,6 @@
 " Under consideration: I'm not sure I want to make these changes yet, but its
 " worth looking at making vim a bit more heavy and seeing how Neovim copes
+"   * Look into NCM2 and maybe solaried et al along with ALEs language server
 "   * Something to visualize the undo state? Gundotree?
 "   * Fugitive or maybe git-gutter. Particularly with github integration
 "   * Rust Plug-ins: complete, compile, filetype config, etc.
@@ -10,7 +11,6 @@
 "   * Javascript, particularly react and node because we use those apparently?
 "   * HTML/CSS/Javascript plugins - zencoding and the like?
 "   * Write up a 'prose' mode (80 columns, centered text, no autocomplete, etc)
-"   * Consider NCM2 as an alternative to deoplete et al.
 
 " Automatic plug-in handling
 call plug#begin('~/.local/share/nvim/plugged')
@@ -77,20 +77,6 @@ set spelllang=en_ca                      " Enable the Canadian English spelling 
 set spell                                " Enable spell checking
 " Expected path for CTags files
 set tags+=,tags
-
-function! LoadCscope()
-  let db = findfile("cscope.out", ".;")
-  if (!empty(db))
-    let path = strpart(db, 0, match(db, "/cscope.out$"))
-    set nocscopeverbose " suppress 'duplicate connection' error
-    exe "cs add " . db . " " . path
-    set cscopeverbose
-  " else add the database pointed to by environment variable 
-  elseif $CSCOPE_DB != "" 
-    cs add $CSCOPE_DB
-  endif
-endfunction
-command LoadCscope call LoadCscope()
 
 " Indentation / cursor behaviour
 set autoindent                           " Enable Copy the current line's indent when making a new line
@@ -163,6 +149,10 @@ set foldminlines=0                       " Enable folding of 'anything', even on
 
 " Custom key bindings start here
 " ------------------------------
+
+" Make a visuale selection and shift it up and down with K and J
+xnoremap <silent> J :call VisualDown()<cr>
+xnoremap <silent> K :call VisualUp()<cr>
 
 " Navigate splits with (control) ⌃[hjkl]  letter
 nnoremap <C-h> <C-w>h
@@ -305,6 +295,21 @@ function! GrepQuickFix(pat)
 endfunction
 command! -nargs=* GrepQF call GrepQuickFix(<q-args>)
 
+" Attempt to load cscope index
+function! LoadCscope()
+  let db = findfile("cscope.out", ".;")
+  if (!empty(db))
+    let path = strpart(db, 0, match(db, "/cscope.out$"))
+    set nocscopeverbose " suppress 'duplicate connection' error
+    exe "cs add " . db . " " . path
+    set cscopeverbose
+  " else add the database pointed to by environment variable 
+  elseif $CSCOPE_DB != "" 
+    cs add $CSCOPE_DB
+  endif
+endfunction
+command! LoadCscope call LoadCscope()
+
 " Quick and dirty 'extract an assignment line to method' call
 function! RubyExtractMethod()
   norm mm
@@ -312,7 +317,6 @@ function! RubyExtractMethod()
   norm k"idam[m"iPkvam=`m==$
 endfunction
 command! -nargs=* REM call RubyExtractMethod()
-
 
 " Plug-in configuration
 " ---------------------
@@ -398,6 +402,27 @@ if &diff
   " ZZ to bale out of 'vimdiff' (nvim -d)
   nnoremap ZZ :qa!<cr>
 end
+
+" A set of fucntions that handle the edge cases of 
+" xnoremap J :move '>+1<CR>gv=gv
+" xnoremap K :move '<-2<CR>gv=gv
+function! s:Move(address, at_limit)
+  if visualmode() == 'V' && !a:at_limit
+    execute "'<,'>move " . a:address
+    call feedkeys('gv=', 'n')
+  endif
+  call feedkeys('gv', 'n')
+endfunction
+
+function! VisualUp() abort range
+  let l:at_top=a:firstline == 1
+  call s:Move("'<-2", l:at_top)
+endfunction
+
+function! VisualDown() abort range
+  let l:at_bottom=a:lastline == line('$')
+  call s:Move("'>+1", l:at_bottom)
+endfunction
 
 " Jesus saves
 command! Jesus w
