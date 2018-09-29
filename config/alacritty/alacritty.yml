@@ -166,6 +166,7 @@ key_bindings:
   - { key: Semicolon, mods: Command|Shift, chars: "\x02\x3a" } # tmux command mode
   - { key: R, mods: Command, chars: "\x02\x2c" } # tmux rename tab
   - { key: P, mods: Command, chars: "\x02\x71" } # tmux jump pane number
+  - { key: U, mods: Command, chars: "\x02\x75" } # use URLView to make urls work
 
   - { key: Left, mods: Command|Shift, chars: "\x02\x7b" } # swap with pane left
   - { key: Right, mods: Command|Shift, chars: "\x02\x7d" } # swap with pane right
