@@ -131,6 +131,12 @@ key_bindings:
   - { key: Minus,    mods: Command, action: DecreaseFontSize             }
   - { key: E, mods: Command|Option, chars: "\x02\x73" }
 
+  # Broadcasting is a work in progress
+  - { key: I, mods: Command|Option, chars: "\x02\x49" }
+  # command+option+shift+i => synchronize off
+  # command+shift+i => broadcast to all windows, all panes
+  # command+control+option+shift+i -> toggle on and off for current pane
+
   - { key: LBracket, mods: Command|Shift, chars: "\x02\x70" } # navigate windows left
   - { key: RBracket, mods: Command|Shift, chars: "\x02\x6e" } # navigate windows right
   - { key: LBracket, mods: Command, chars: "\x02\x4f" } # navigate panes left
