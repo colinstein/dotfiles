@@ -1,16 +1,11 @@
-" Under consideration: I'm not sure I want to make these changes yet, but its
-" worth looking at making vim a bit more heavy and seeing how Neovim copes
-"   * Look into NCM2 and maybe solaried et al along with ALEs language server
-"   * Something to visualize the undo state? Gundotree?
-"   * Fugitive or maybe git-gutter. Particularly with github integration
-"   * Rust Plug-ins: complete, compile, filetype config, etc.
-"   * Python Plug-ins - complete, improved highlight/folding, etc.
-"   * Lua Plugins - particularly a linter
-"   * C-plugins - c.vim, possibly doxygen, 
-"   * Git-flavoured markdown maybe something for graphviz and CSVs?
-"   * Javascript, particularly react and node because we use those apparently?
-"   * HTML/CSS/Javascript plugins - zencoding and the like?
-"   * Write up a 'prose' mode (80 columns, centered text, no autocomplete, etc)
+" Things under consideration
+" * Look into NCM2 and maybe solargraph et al along with ALEs language server
+" * Something to visualize the undo state? Gundotree?
+" * Fugitive or maybe git-gutter. Particularly with github integration
+" * Git-flavoured markdown maybe something for graphviz and CSVs? gabrielelana/vim-markdown
+" * Javascript, particularly react, typescript and node because we use them?
+" * HTML/CSS/Javascript plugins - zencoding and the like?
+" * Write up a 'prose' mode (80 columns, centered text, no autocomplete, etc)
 
 " Automatic plug-in handling
 call plug#begin('~/.local/share/nvim/plugged')
@@ -27,13 +22,12 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'tpope/vim-commentary'                                     " Better handling of code comments. Toggle with 'gc' or run :Commentary
   Plug 'tpope/vim-endwise'                                        " Automatic insert of 'end' pairs like 'endfunc', 'fi', end', in Ruby, zsh, vim, etc.
   Plug 'rickhowe/diffchar.vim'                                    " Improvements to diff mode showing exact changes in lines
-  " Some plug-ins unique to Ruby development
-  Plug 'tpope/vim-rails',           { 'for': 'ruby' }             " Improved rails highlighting, helpers, etc.
-  Plug 'vim-ruby/vim-ruby',         { 'for': 'ruby' }             " Improved ruby syntax highlighting navigation and spell checking
 
-  " Some plug-ins unique to Golang development
-  Plug 'fatih/vim-go'                                             " Improved syntax highlighting, folding, renaming ,linting, etc
-
+  Plug 'tpope/vim-rails', { 'for': 'ruby' }                       " Improved rails highlighting, helpers, etc
+  " Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+  Plug 'fatih/vim-go'
+  Plug 'mdempsky/gocode', { 'rtp': 'nvim', 'do': '~/.local/share/nvim/plugged/gocode/nvim/symlink.sh' }
+  Plug 'rust-lang/rust.vim'
 call plug#end()
 
 " Generic editor options
@@ -41,7 +35,6 @@ filetype plugin indent on                " Enable automatic file type detection 
 set autoread                             " Enable automatic reloading of open files edited outside Vim
 set backspace=eol,start,indent           " Enable backspace past end of line, start of edit, etc.
 set clipboard+=unnamed                   " Enable the system clipboard unless a register is specified
-"set formatoptions+=a                     " Enable wrapping as you type
 set hidden                               " Disable unloading of buffers that aren't visible
 set history=1000                         " Enable remembering of 1000 commands, searches, inputs, and expressions
 set mouse=a                              " Enable use of the mouse
@@ -49,8 +42,8 @@ set noerrorbells                         " Disable all error bells
 set shortmess+=I                         " Disable show the startup screen
 set visualbell                           " Disable beeping, use the visual bell instead
 set wildmenu                             " Enable showing suggestions when using auto complete in command mode
-
-" Providers for outside services
+set completeopt=menu                     " Disable a preview split for omnicompletes
+" Providers for outside services - home brew pythons
 let g:python_host_prog='/usr/local/bin/python2'
 let g:python3_host_prog='/usr/local/bin/python3'
 
@@ -68,7 +61,7 @@ set directory=~/.vim/swap                " Path to store swap files (so we don't
 set nobackup                             " Disable backup files (because we use Git for versioning)
 
 " Persistent undo
-set undodir=~/.config/nvim/undo          " Path to persist undo files (for history that lasts cross-session)
+set undodir=~/.vim/undo                  " Path to persist undo files (for history that lasts cross-session)
 set undofile                             " Enable saving backups between sessions
 
 " Spelling and custom dictionaries
@@ -104,8 +97,6 @@ set grepformat=%f:%l:%c:%m               " Enable parsing of Ripgrep results (fi
 colorscheme base16-onedark               " Use the Base-16 colour scheme
 let g:netrw_banner=0                     " Disable the Netrw 'chrome'
 set background=dark                      " Enable Vim's 'use colours that look good on dark background' mode
-"set cursorline                           " Enable highlighting the row that the cursor is one
-set colorcolumn=80                       " Enable a marker for the 80th column
 set laststatus=2                         " Enable always showing the status line
 set list                                 " Enable the display of 'invisible' characters like Tab, EOL, etc.
 set number                               " Enable line-number display
@@ -207,18 +198,6 @@ cnoremap %% <C-R>=expand("%:h").'/'<cr>
 " In command mode, press ^r to search the history with FZF works for searches too
 cnoremap <expr> <C-r> <SID>FzfCommandHistory()
 
-" Toggle snippet expansions with tab, otherwise cycle auto-complete suggestions
-" imap <expr><TAB>
-"   \ neosnippet#expandable_or_jumpable() ?
-"   \ "\<Plug>(neosnippet_expand_or_jump)" :
-"   \ pumvisible() ? "\<C-n>" : "\<TAB>"
-
-" Mu-completion
-let g:mucomplete#chains = {}
-let g:mucomplete#chains.default  = ['omni', 'c-p']
-let g:mucomplete#chains.markdown = ['keyp', 'keyn', 'dict', 'uspl']
-let g:mucomplete#chains.ruby = ['tags', 'c-p', 'uspl']
-
 " Create a custom status-line
 set statusline=%<                                        " Where to truncate the file name
 set statusline+=%f                                       " Path of the file in the buffer, relative to CWD
@@ -318,6 +297,27 @@ function! RubyExtractMethod()
 endfunction
 command! -nargs=* REM call RubyExtractMethod()
 
+" A set of fucntions that handle the edge cases of 
+" xnoremap J :move '>+1<CR>gv=gv
+" xnoremap K :move '<-2<CR>gv=gv
+function! s:Move(address, at_limit)
+  if visualmode() == 'V' && !a:at_limit
+    execute "'<,'>move " . a:address
+    call feedkeys('gv=', 'n')
+  endif
+  call feedkeys('gv', 'n')
+endfunction
+
+function! VisualUp() abort range
+  let l:at_top=a:firstline == 1
+  call s:Move("'<-2", l:at_top)
+endfunction
+
+function! VisualDown() abort range
+  let l:at_bottom=a:lastline == line('$')
+  call s:Move("'>+1", l:at_bottom)
+endfunction
+
 " Plug-in configuration
 " ---------------------
 " ALE - Linting
@@ -338,20 +338,6 @@ highlight ALEStyleWarningSign ctermfg=03 ctermbg=10
 let g:ale_fixers = {
 \   'ruby': ['rubocop'],
 \}
-" Deoplete - auto-completion
-" let g:deoplete#enable_at_startup=1       " Enable auto-complete at startup
-" let g:deoplete#max_list=20               " Enable maximum of 20 auto-complete suggestions
-" let g:deoplete#auto_complete_delay=100   " Enable a 50ms wait before showing auto-complete options
-" Use an extra large tags cache for large projects
-" let deoplete#tag#cache_limit_size = 50000000
-
-" " Configure some auto-completion trigger patterns
-" let g:deoplete#sources#omni#input_patterns = {
-"   \ "ruby" : '[^. *\t]\.\w*\|\h\w*::',
-"   \ }
-
-" Modify buffer ranking for auto complete suggestions
-" call deoplete#custom#set('buffer', 'rank', 501)
 
 " Vim-ruby configuration
 " ----------------------
@@ -359,13 +345,6 @@ let g:ruby_indent_access_modifier_style = 'normal'    " Place 'access modifiers'
 let g:ruby_indent_block_style = 'do'                  " Always indent one level inside of a block
 let g:ruby_indent_assignment_style = 'begin'          " Variable assignment lines up on the 'leftmost' column not the = sign
 let ruby_spellcheck_strings = 1                       " Enable spell-checking inside strings
-
-" Neosnippets - tiny text templates
-" ---------------------------------
-let g:neosnippet#snippets_directory='~/.config/nvim/snippets'
-let g:neosnippet#disable_runtime_snippets = {
-  \'_' : 1,
-  \ }
 
 " Custom configuration for filetypes
 " ----------------------------------
@@ -402,27 +381,6 @@ if &diff
   " ZZ to bale out of 'vimdiff' (nvim -d)
   nnoremap ZZ :qa!<cr>
 end
-
-" A set of fucntions that handle the edge cases of 
-" xnoremap J :move '>+1<CR>gv=gv
-" xnoremap K :move '<-2<CR>gv=gv
-function! s:Move(address, at_limit)
-  if visualmode() == 'V' && !a:at_limit
-    execute "'<,'>move " . a:address
-    call feedkeys('gv=', 'n')
-  endif
-  call feedkeys('gv', 'n')
-endfunction
-
-function! VisualUp() abort range
-  let l:at_top=a:firstline == 1
-  call s:Move("'<-2", l:at_top)
-endfunction
-
-function! VisualDown() abort range
-  let l:at_bottom=a:lastline == line('$')
-  call s:Move("'>+1", l:at_bottom)
-endfunction
 
 " Jesus saves
 command! Jesus w
