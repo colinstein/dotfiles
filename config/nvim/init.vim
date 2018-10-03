@@ -13,7 +13,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     UpdateRemotePlugins
   endfunction
   Plug '/usr/local/opt/fzf'                    " Quick searching for files
-  Plug 'chriskempson/base16-vim'               " Pretty colours
+  Plug 'arcticicestudio/nord-vim'
   Plug 'junegunn/fzf.vim'                      " More FZF, additional Vim power
   Plug 'w0rp/ale'                              " Linting in the gutter
 
@@ -49,14 +49,17 @@ filetype plugin indent on                  " Enable automatic file type detectio
 set autoread                               " Enable automatic reloading of open files edited outside Vim
 set backspace=eol,start,indent             " Enable backspace past end of line, start of edit, etc.
 set clipboard+=unnamed                     " Enable the system clipboard unless a register is specified
-set completeopt=noinsert,menuone,noselect  " Disable settings that will make you fightst the complete menuu
+set completeopt=noinsert,menuone,noselect  " Disable settings that will make you fight the complete menu
 set hidden                                 " Disable unloading of buffers that aren't visible
 set history=1000                           " Enable remembering of 1000 commands, searches, inputs, and expressions
 set mouse=a                                " Enable use of the mouse
 set noerrorbells                           " Disable all error bells
 set pumheight=15                           " Set an upper limit on the size of the pop-up menu
 set shortmess+=I                           " Disable show the startup screen
-set shortmess+=c                           " Disable match 'x of x' or 'no matches' spam from completion system
+set shortmess+=c                           " Disable Completeion messages
+set shortmess+=W                           " Disable 'wrote file' messages
+set shortmess+=F                           " Disable file info when editing
+set shortmess+=s                           " Disable Search wrapping messages
 set visualbell                             " Disable beeping, use the visual bell instead
 set wildmenu                               " Enable showing suggestions when using auto complete in command mode
 set completeopt=menu                       " Disable a preview split for omnicompletes
@@ -106,7 +109,9 @@ set grepprg=rg\ --vimgrep\ --no-heading  " Enable the use of Ripgrep for searchi
 set grepformat=%f:%l:%c:%m               " Enable parsing of Ripgrep results (filename:line:column:match)
 
 " Color and appearance
-colorscheme base16-onedark               " Use the Base-16 colour scheme
+"colorscheme base16-onedark               " Use the Base-16 colour scheme
+colorscheme nord                         " Use the nord colour scheme
+let g:nord_italic = 1                    " Enable italics for comments and args
 let g:netrw_banner=0                     " Disable the Netrw 'chrome'
 set background=dark                      " Enable Vim's 'use colours that look good on dark background' mode
 set laststatus=2                         " Enable always showing the status line
@@ -120,18 +125,15 @@ set signcolumn=yes                       " Enable the display of the sign column
 set wildignorecase                       " Ignore case sensitivity in wildmenu (like tab-completing :commands)
 syntax enable                            " Enable syntax highlighting
 
-" Improve the colors used in CScope windows and the like
-highlight ModeMsg cterm=NONE ctermfg=5
 " Simplify spelling errors to underlines
-highlight SpellBad cterm=underline
 highlight clear SpellCap
 highlight clear SpellRare
+highlight clear SpellLocal
+highlight clear SpellBad
+highlight SpellBad cterm=underline
 
-" Set some Make spelling issues a little less colourful
-highlight SpellBad cterm=underline ctermbg=0
-highlight SpellRare cterm=none ctermbg=0
-highlight SpellLocal cterm=none ctermbg=0
-highlight SpellCap cterm=none ctermbg=0
+" Simplify split colors
+highlight VertSplit ctermbg=none
 
 " Configure some nicer glyphs for 'hidden' characters
 set listchars=tab:▸\ ,eol:¬,trail:·
@@ -223,9 +225,10 @@ set statusline+=%-4l                                     " Column of cursor
 set statusline+=%3p%%                                    " Percentage through the file
 
 " Set colours: grey by default, green for insert mode
-hi StatusLine cterm=reverse ctermfg=08 ctermbg=00
-au InsertEnter * hi StatusLine cterm=reverse ctermfg=02 ctermbg=00
-au Insertleave * hi StatusLine cterm=reverse ctermfg=08 ctermbg=00
+hi StatusLine cterm=reverse ctermfg=0 ctermbg=4
+hi StatusLineNC cterm=reverse ctermfg=0 ctermbg=8
+"au InsertEnter * hi StatusLine cterm=reverse ctermfg=02 ctermbg=00
+"au Insertleave * hi StatusLine cterm=reverse ctermfg=08 ctermbg=00
 
 " Toggle 'zooming' a split to fill the screen and restore to it's previous size
 function! s:ZoomToggle() abort
@@ -332,7 +335,7 @@ endfunction
 
 " Plug-in configuration
 " ---------------------
-" ALE - Linting
+" ALE
 let g:ale_sign_error = '● '             " Use an solid circle symbol for errors in the sign column
 let g:ale_sign_info = '‣ '              " Use a solid little arrow for 'info' in the sign column
 let g:ale_sign_warning = '○ '           " Use a hollow circle symbol for warnings in the sign column
@@ -342,11 +345,11 @@ let g:ale_lint_on_enter = 1             " Run the linter whenever a file is open
 let g:ale_lint_on_save = 1              " Run the linter whenever a file is saved
 
 " It may be nice to highlight the actual error here too - drop the 'sign' part
-highlight ALEErrorSign        ctermfg=01 ctermbg=10
-highlight ALEWarningSign      ctermfg=03 ctermbg=10
-highlight ALEInfoSign         ctermfg=04 ctermbg=10
-highlight ALEStyleErrorSign   ctermfg=03 ctermbg=10
-highlight ALEStyleWarningSign ctermfg=03 ctermbg=10
+highlight ALEErrorSign        ctermfg=1
+highlight ALEWarningSign      ctermfg=3
+highlight ALEInfoSign         ctermfg=4
+highlight ALEStyleErrorSign   ctermfg=3
+highlight ALEStyleWarningSign ctermfg=3
 let g:ale_fixers = {
 \   'ruby': ['rubocop'],
 \}
@@ -358,6 +361,22 @@ let g:ruby_indent_block_style = 'do'                  " Always indent one level 
 let g:ruby_indent_assignment_style = 'begin'          " Variable assignment lines up on the 'leftmost' column not the = sign
 let ruby_spellcheck_strings = 1                       " Enable spell-checking inside strings
 
+" FZF configuration - the colours suck
+let g:fzf_buffers_jump = 1
+let g:fzf_action = {
+\  'ctrl-s': 'split',
+\  'ctrl-v': 'vsplit'
+\}
+
+function! s:fzf_statusline()
+  " Override statusline as you like
+  highlight fzf1 ctermfg=0 ctermbg=0
+  highlight fzf2 ctermfg=0 ctermbg=0
+  highlight fzf3 ctermfg=0 ctermbg=0
+  setlocal statusline=\ 
+endfunction
+
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
 " Custom configuration for filetypes
 " ----------------------------------
 augroup filetype_go
@@ -376,13 +395,20 @@ autocmd FileType netrw setl bufhidden=delete
 
 " By default Vimdif has some pretty terrible colours. This should it sane. It's a bit of a work in progress
 if &diff
-  highlight Normal      cterm=none    ctermfg=08    ctermbg=0
-  highlight DiffDelete  cterm=none    ctermfg=01    ctermbg=0
-  highlight DiffAdd     cterm=none    ctermfg=02    ctermbg=0
-  highlight DiffText    cterm=none    ctermfg=03    ctermbg=0
-  highlight DiffChange  cterm=none    ctermfg=09    ctermbg=0
+  " Still trying to work out the more mono colours for changed lines.  Want
+  " line in blue, change add in white
+  " highlight Normal cterm=none ctermfg=8
+  " highlight DiffDelete cterm=none ctermfg=0 ctermbg=0
+  " highlight DiffAdd cterm=none ctermfg=7 ctermbg=0
+  " highlight DiffText cterm=none ctermfg=4 ctermbg=0
+  " highlight DiffChange cterm=none ctermfg=4 ctermbg=0
+  highlight Normal cterm=none ctermfg=7
+  highlight DiffDelete cterm=none ctermfg=1 ctermbg=0
+  highlight DiffAdd cterm=none ctermfg=2 ctermbg=0
+  highlight DiffText cterm=none ctermfg=3 ctermbg=0
+  highlight DiffChange cterm=none ctermfg=9 ctermbg=0
   set nospell
-  set wrap
+  set nowrap
   let g:diff_translations = 0
   set filetype=text
   set syntax=diff
@@ -390,7 +416,6 @@ if &diff
   set diffexpr=""
   set colorcolumn=0
   autocmd FilterWritePre * if &diff | setlocal wrap< | set syntax=diff | set nofoldenable | set filetype=text | endif
-  " ZZ to bale out of 'vimdiff' (nvim -d)
   nnoremap ZZ :qa!<cr>
 end
 
