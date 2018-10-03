@@ -12,79 +12,91 @@ call plug#begin('~/.local/share/nvim/plugged')
    function! DoRemote(arg)
     UpdateRemotePlugins
   endfunction
-  Plug '/usr/local/opt/fzf'                                       " Quick searching for files
-  Plug 'chriskempson/base16-vim'                                  " Pretty colours
-  Plug 'junegunn/fzf.vim'                                         " More FZF, additional Vim power
-  Plug 'w0rp/ale'                                                 " Linting in the gutter
+  Plug '/usr/local/opt/fzf'                    " Quick searching for files
+  Plug 'chriskempson/base16-vim'               " Pretty colours
+  Plug 'junegunn/fzf.vim'                      " More FZF, additional Vim power
+  Plug 'w0rp/ale'                              " Linting in the gutter
 
   " Some plug-ins that are generally useful for many programming languages
-  Plug 'machakann/vim-sandwich'                                   " Simplify addition, change of pairs of characters like brackets and quotes
-  Plug 'tpope/vim-commentary'                                     " Better handling of code comments. Toggle with 'gc' or run :Commentary
-  Plug 'tpope/vim-endwise'                                        " Automatic insert of 'end' pairs like 'endfunc', 'fi', end', in Ruby, zsh, vim, etc.
-  Plug 'rickhowe/diffchar.vim'                                    " Improvements to diff mode showing exact changes in lines
+  Plug 'machakann/vim-sandwich'                " Simplify addition, change of pairs of characters like brackets and quotes
+  Plug 'tpope/vim-commentary'                  " Better handling of code comments. Toggle with 'gc' or run :Commentary
+  Plug 'tpope/vim-endwise'                     " Automatic insert of 'end' pairs like 'endfunc', 'fi', end', in Ruby, zsh, vim, etc.
+  Plug 'rickhowe/diffchar.vim'                 " Improvements to diff mode showing exact changes in lines
 
-  Plug 'tpope/vim-rails', { 'for': 'ruby' }                       " Improved rails highlighting, helpers, etc
-  " Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+  " An attempt to get better autocompletion
+  Plug 'ncm2/ncm2'                             " A framework for async completion
+  Plug 'roxma/nvim-yarp'                       " A remote plugin framework
+  Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+  Plug 'ncm2/ncm2-bufword'                     " Auto-completion suggestions based on words in  current buffer
+
+  " Some language improvements
+  Plug 'tpope/vim-rails', { 'for': 'ruby' }
+  Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
   Plug 'fatih/vim-go'
   Plug 'mdempsky/gocode', { 'rtp': 'nvim', 'do': '~/.local/share/nvim/plugged/gocode/nvim/symlink.sh' }
   Plug 'rust-lang/rust.vim'
 call plug#end()
 
-" Generic editor options
-filetype plugin indent on                " Enable automatic file type detection & indentation
-set autoread                             " Enable automatic reloading of open files edited outside Vim
-set backspace=eol,start,indent           " Enable backspace past end of line, start of edit, etc.
-set clipboard+=unnamed                   " Enable the system clipboard unless a register is specified
-set hidden                               " Disable unloading of buffers that aren't visible
-set history=1000                         " Enable remembering of 1000 commands, searches, inputs, and expressions
-set mouse=a                              " Enable use of the mouse
-set noerrorbells                         " Disable all error bells
-set shortmess+=I                         " Disable show the startup screen
-set visualbell                           " Disable beeping, use the visual bell instead
-set wildmenu                             " Enable showing suggestions when using auto complete in command mode
-set completeopt=menu                     " Disable a preview split for omnicompletes
 " Providers for outside services - home brew pythons
 let g:python_host_prog='/usr/local/bin/python2'
 let g:python3_host_prog='/usr/local/bin/python3'
 
+" Generic editor options
+filetype plugin indent on                  " Enable automatic file type detection & indentation
+set autoread                               " Enable automatic reloading of open files edited outside Vim
+set backspace=eol,start,indent             " Enable backspace past end of line, start of edit, etc.
+set clipboard+=unnamed                     " Enable the system clipboard unless a register is specified
+set completeopt=noinsert,menuone,noselect  " Disable settings that will make you fightst the complete menuu
+set hidden                                 " Disable unloading of buffers that aren't visible
+set history=1000                           " Enable remembering of 1000 commands, searches, inputs, and expressions
+set mouse=a                                " Enable use of the mouse
+set noerrorbells                           " Disable all error bells
+set pumheight=15                           " Set an upper limit on the size of the pop-up menu
+set shortmess+=I                           " Disable show the startup screen
+set shortmess+=c                           " Disable match 'x of x' or 'no matches' spam from completion system
+set visualbell                             " Disable beeping, use the visual bell instead
+set wildmenu                               " Enable showing suggestions when using auto complete in command mode
+set completeopt=menu                       " Disable a preview split for omnicompletes
 " File encoding
-set encoding=utf-8 nobomb                " Make new files UTF-8 without BOM by default (BOM can cause issues)
-set fileencoding=utf-8                   " Enable saving files as UTF-8 by default
-set expandtab                            " Enable the use of spaces instead of tabs when indenting
-set shiftwidth=2                         " Enable using 2 spaces for each level of indent
-set softtabstop=2                        " Enable inserting 2 spaces when you press Tab
-set tabstop=8                            " Enable treating Tabs as 8 spaces to keep layout in tabbed files sane
+set encoding=utf-8 nobomb                  " Make new files UTF-8 without BOM by default (BOM can cause issues)
+set fileencoding=utf-8                     " Enable saving files as UTF-8 by default
+set expandtab                              " Enable the use of spaces instead of tabs when indenting
+set shiftwidth=2                           " Enable using 2 spaces for each level of indent
+set softtabstop=2                          " Enable inserting 2 spaces when you press Tab
+set tabstop=8                              " Enable treating Tabs as 8 spaces to keep layout in tabbed files sane
 
 " Backup and Swap
-set backupdir=~/.vim/backup              " Path to store backup files (in case we screw up without real VCS)
-set directory=~/.vim/swap                " Path to store swap files (so we don't pollute other paths)
-set nobackup                             " Disable backup files (because we use Git for versioning)
+set backupdir=~/.vim/backup                " Path to store backup files (in case we screw up without real VCS)
+set directory=~/.vim/swap                  " Path to store swap files (so we don't pollute other paths)
+set nobackup                               " Disable backup files (because we use Git for versioning)
 
 " Persistent undo
-set undodir=~/.vim/undo                  " Path to persist undo files (for history that lasts cross-session)
-set undofile                             " Enable saving backups between sessions
+set undodir=~/.vim/undo                    " Path to persist undo files (for history that lasts cross-session)
+set undofile                               " Enable saving backups between sessions
 
 " Spelling and custom dictionaries
 set spellfile=~/.config/nvim/words.utf-8.add
-set spelllang=en_ca                      " Enable the Canadian English spelling dictionary
-set spell                                " Enable spell checking
+set spelllang=en_ca                          " Enable the Canadian English spelling dictionary
+set spell                                    " Enable spell checking
 " Expected path for CTags files
 set tags+=,tags
 
 " Indentation / cursor behaviour
-set autoindent                           " Enable Copy the current line's indent when making a new line
-set nojoinspaces                         " Disable inserting two spaces after punctuation when you use a Join
-set smartindent                          " Enable 'smarter' auto-indenting watching Syntax for hints
-set smarttab                             " Enable tab matching indentation when used at the start of a line
-set nowrap                               " Disable automatic line wrapping
+set autoindent                               " Enable Copy the current line's indent when making a new line
+set nojoinspaces                             " Disable inserting two spaces after punctuation when you use a Join
+set smartindent                              " Enable 'smarter' auto-indenting watching Syntax for hints
+set smarttab                                 " Enable tab matching indentation when used at the start of a line
+set nowrap                                   " Disable automatic line wrapping
 
 " File Browser configuration
-let g:netrw_browse_split=4               " Enable opening the selected file in previous window
-let g:netrw_liststyle=3                  " Enable netrw use a 'long'-style display (3=tree)
-let g:netrw_size_style='h'               " Enable human-readable base-10 file sizes in the browser
-let g:netrw_winsize=-40                  " Set the default width of the browser to 40 columns
-" Enable hiding normally 'hidden' files in Netrw
-let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_browse_split=4                   " Enable opening the selected file in previous window
+let g:netrw_liststyle=3                      " Enable netrw use a 'long'-style display (3=tree)
+let g:netrw_size_style='h'                   " Enable human-readable base-10 file sizes in the browser
+let g:netrw_winsize=-40                      " Set the default width of the browser to 40 columns
+let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+' " Enable hiding normally 'hidden' files in Netrw
 
 " Search and replace
 set inccommand=split                     " Show a preview of replacement commands as you type
