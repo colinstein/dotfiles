@@ -6,16 +6,32 @@ unsetopt AUTO_CD
 unsetopt CDABLE_VARS
 unsetopt CORRECT
 setopt PUSHD_IGNORE_DUPS
+setopt ignoreeof
 
 alias ls='/usr/local/bin/gls -F -N --group-directories-first --color=auto'
 alias la='/usr/local/bin/gls -a -N --color=auto'
 alias ll='/usr/local/bin/gls -l -A -N --color=auto'
 alias vim='nvim'
+alias vimdiff='nvim -d'
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-eval $(gdircolors "$HOME/.dircolors")
-eval "$(goenv init -)"
-chruby 2.4.2
+alias bbb='cd $BOURGEOIS'
+alias sss='cd $SHOPIFY'
+
+
+# load dev, but only if present and the shell is interactive
+if [[ -f /opt/dev/dev.sh ]] && [[ $- == *i* ]]; then
+  source /opt/dev/dev.sh
+fi
+
+# load fzf, but only if present and the shell is interactive
+if [[ -f ~/.fzf.zsh ]] && [[ $- == *i* ]]; then
+  source ~/.fzf.zsh
+fi
+
+# eval $(gdircolors "$HOME/.config/dircolors/base16.dircolors")
+eval $(gdircolors "$HOME/.config/dircolors/nord.dircolors")
+# eval "$(goenv init -)"
+chruby 2.4.4
 
 # Generate ctags and cscope files
 function gentags() {
