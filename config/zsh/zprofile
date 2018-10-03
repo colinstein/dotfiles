@@ -7,7 +7,7 @@ export HOMEBREW_NO_ANALYTICS=1
 export LANG='en_CA.UTF-8'
 
 export GOPATH=$HOME
-export FZF_DEFAULT_OPTS='--bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all'
+export FZF_DEFAULT_OPTS='--bind ctrl-a:select-all,ctrl-d:deselect-all,ctrl-t:toggle-all --color fg:4,hl:8,fg+:15,bg+:0,hl:4,info:8,prompt:3,pointer:4,spinner:4,marker:4'
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export PATH=$HOME/src/bin:$PATH
 export SHOPIFY=$HOME/src/github.com/Shopify/shopify
@@ -35,3 +35,4 @@ path=(
   $HOME/.cargo/bin
   $path
 )
+
