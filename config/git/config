@@ -25,11 +25,11 @@
   meta = blue
   frag = magenta bold
   old = red
-  new = cyan
+  new = green
   whitespace = red reverse
 
 [color "status"]
-  added = cyan
+  added = green
   changed = yellow
   untracked = red
 
@@ -48,6 +48,7 @@
   unstage = reset -q HEAD --
   fuckit = "!git . && git commit -m 'YOLO' && git push origin head -f"
   uncommit = reset --mixed HEAD~
+  patch = "!printf 'You probably want git diff > foo.patch, or git diff --cached > foo.patch for staged changes\n'"
   discard = checkout --
   unfuck = !git reset --hard HEAD && git clean -d -f
   precommit = diff --cached --diff-algorithm=minimal -w
@@ -55,3 +56,4 @@
   cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|develop' | xargs -n 1 git branch -d"
   stashes = "!git stash list --pretty='%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs'"
   branchlog = log --pretty=format:'[%Cblue%an%Creset] %h %Cgreen%s%Creset' --numstat --reverse master..
+  pr = "!f() { id=\"$1\"; git fetch origin pull/${id}/head:pr_${id}; git checkout pr_${id}; }; f"

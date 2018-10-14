@@ -109,9 +109,9 @@ set grepprg=rg\ --vimgrep\ --no-heading  " Enable the use of Ripgrep for searchi
 set grepformat=%f:%l:%c:%m               " Enable parsing of Ripgrep results (filename:line:column:match)
 
 " Color and appearance
-"colorscheme base16-onedark               " Use the Base-16 colour scheme
 colorscheme nord                         " Use the nord colour scheme
-let g:nord_italic = 1                    " Enable italics for comments and args
+let g:nord_comment_brightness=12         " Make is so you can actually read comments
+let g:nord_italic=1                      " Enable italics for comments and args
 let g:netrw_banner=0                     " Disable the Netrw 'chrome'
 set background=dark                      " Enable Vim's 'use colours that look good on dark background' mode
 set laststatus=2                         " Enable always showing the status line
@@ -227,8 +227,8 @@ set statusline+=%3p%%                                    " Percentage through th
 " Set colours: grey by default, green for insert mode
 hi StatusLine cterm=reverse ctermfg=0 ctermbg=4
 hi StatusLineNC cterm=reverse ctermfg=0 ctermbg=8
-"au InsertEnter * hi StatusLine cterm=reverse ctermfg=02 ctermbg=00
-"au Insertleave * hi StatusLine cterm=reverse ctermfg=08 ctermbg=00
+" au InsertEnter * hi StatusLine cterm=reverse ctermfg=02 ctermbg=00
+" au Insertleave * hi StatusLine cterm=reverse ctermfg=08 ctermbg=00
 
 " Toggle 'zooming' a split to fill the screen and restore to it's previous size
 function! s:ZoomToggle() abort
@@ -377,6 +377,7 @@ function! s:fzf_statusline()
 endfunction
 
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
+
 " Custom configuration for filetypes
 " ----------------------------------
 augroup filetype_go
@@ -395,21 +396,14 @@ autocmd FileType netrw setl bufhidden=delete
 
 " By default Vimdif has some pretty terrible colours. This should it sane. It's a bit of a work in progress
 if &diff
-  " Still trying to work out the more mono colours for changed lines.  Want
-  " line in blue, change add in white
-  " highlight Normal cterm=none ctermfg=8
-  " highlight DiffDelete cterm=none ctermfg=0 ctermbg=0
-  " highlight DiffAdd cterm=none ctermfg=7 ctermbg=0
-  " highlight DiffText cterm=none ctermfg=4 ctermbg=0
-  " highlight DiffChange cterm=none ctermfg=4 ctermbg=0
   highlight Normal cterm=none ctermfg=7
-  highlight DiffDelete cterm=none ctermfg=1 ctermbg=0
+  highlight DiffDelete cterm=none ctermfg=0 ctermbg=0
   highlight DiffAdd cterm=none ctermfg=2 ctermbg=0
   highlight DiffText cterm=none ctermfg=3 ctermbg=0
   highlight DiffChange cterm=none ctermfg=9 ctermbg=0
   set nospell
   set nowrap
-  let g:diff_translations = 0
+  let g:diff_translations=0
   set filetype=text
   set syntax=diff
   set diffopt+=iwhite
