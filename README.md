@@ -17,6 +17,3 @@ For now I've got some plugins required in ~/.config/zsh:
 
   - autosuggestions
   - syntax-highlighting
-
-Those should become git submodules probably, but that can wait until some sort
-of bash script to make it all link nicely.
