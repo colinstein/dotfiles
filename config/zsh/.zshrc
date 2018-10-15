@@ -97,6 +97,9 @@ bindkey "^ " autosuggest-execute
 # auto complete with tab key, function is defined in functions.zsh
 bindkey "^I" expand_or_complete_with_ellipses
 
+# Anable case-insizitve completion
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
 zstyle ':completion:*:descriptions' format %{$fg[yellow]%}%d%f   # Draw group descriptions in yellow
 zstyle ':completion:*:messages' format %{$fg[cyan]%d%f           # Draw messages in cyan
 zstyle ':completion:*:warnings' format %{$fg[red]%}No matches%f  # Draw no matches warning in red
