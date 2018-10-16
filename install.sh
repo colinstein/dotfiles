@@ -2,8 +2,8 @@
 ln -s "$(pwd)/config/alacritty" "$HOME/.config/alacritty"
 
 ln -s "$(pwd)/config/tmux.conf" "$HOME/.tmux.conf"
+
 mkdir -p "$HOME/.config"
-ln -s "$(pwd)/config/git" "$HOME/.config/git"
 
 mkdir -p "$HOME/.config/nvim"
 mkdir -p "$HOME/.vim/backup"
@@ -21,9 +21,12 @@ cat > "$HOME/.zshenv" << EOF
 ZDOTDIR=\$HOME/.config/zsh
 source \$ZDOTDIR/.zshenv
 EOF
-
 ln -s "$(pwd)/config/zsh" "$HOME/.config/zsh"
 
-# symlink dircolors
-# symlink pry
-# symlink defaultbindings
+ln -s "$(pwd)/config/pry" "$HOME/.config/pry"
+
+ln -s "$(pwd)/config/git" "$HOME/.config/git"
+
+ln -s "$(pwd)/config/dircolors" "$HOME/.config/dircolors"
+
+ln -s "$(pwd)/Library/KeyBindings/DefaultKeyBinding.dict" "$HOME/Library/KeyBindings/DefaultKeyBinding.dict"
