@@ -30,7 +30,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-  Plug 'ncm2/ncm2-bufword'                     " Auto-completion suggestions based on words in  current buffer
+  Plug 'ncm2/ncm2-bufword'                     " Auto-completion suggestions based on words in current buffer
 
   " Some language improvements
   Plug 'tpope/vim-rails', { 'for': 'ruby' }
