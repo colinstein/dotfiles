@@ -30,7 +30,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     \ 'branch': 'next',
     \ 'do': 'bash install.sh',
     \ }
-  Plug 'ncm2/ncm2-bufword'                     " Auto-completion suggestions based on words in current buffer
+  Plug 'ncm2/ncm2-bufword'                     " Auto-completion suggestions based on words in  current buffer
 
   " Some language improvements
   Plug 'tpope/vim-rails', { 'for': 'ruby' }
@@ -394,13 +394,15 @@ augroup END
 " Fix the tendency for netrw to leave unmodified buffers open
 autocmd FileType netrw setl bufhidden=delete
 
-" By default Vimdif has some pretty terrible colours. This should it sane. It's a bit of a work in progress
+" Override the default colors for patches
+highlight Normal cterm=none ctermfg=7
+highlight DiffDelete cterm=none ctermfg=1 ctermbg=0
+highlight DiffAdd cterm=none ctermfg=2 ctermbg=0
+highlight DiffText cterm=none ctermfg=3 ctermbg=0
+highlight DiffChange cterm=none ctermfg=9 ctermbg=0
+
+" improve configuration when dealing with diffs
 if &diff
-  highlight Normal cterm=none ctermfg=7
-  highlight DiffDelete cterm=none ctermfg=0 ctermbg=0
-  highlight DiffAdd cterm=none ctermfg=2 ctermbg=0
-  highlight DiffText cterm=none ctermfg=3 ctermbg=0
-  highlight DiffChange cterm=none ctermfg=9 ctermbg=0
   set nospell
   set nowrap
   let g:diff_translations=0
