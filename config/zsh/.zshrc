@@ -129,4 +129,5 @@ zstyle ':completion:*' list-dirs-first true                                     
 zstyle ':completion:*:(rm|mv|cp):*' ignore-line yes    # Don't use words on the line as possible completions
 
 # enable the most recent installed ruby version
-chruby $(echo /opt/rubies/**(/[-1]) |cut -d/ -f4 )
+# this needs a wrapper to detect chruby
+# chruby $(echo /opt/rubies/**(/[-1]) |cut -d/ -f4 )
