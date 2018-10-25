@@ -1,9 +1,9 @@
 #!/bin/sh
+mkdir -p "$HOME/.config"
+
 ln -s "$(pwd)/config/alacritty" "$HOME/.config/alacritty"
 
 ln -s "$(pwd)/config/tmux.conf" "$HOME/.tmux.conf"
-
-mkdir -p "$HOME/.config"
 
 mkdir -p "$HOME/.config/nvim"
 mkdir -p "$HOME/.vim/backup"
