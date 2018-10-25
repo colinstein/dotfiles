@@ -15,6 +15,7 @@ if [[ $- == *i* ]]; then;
   # internal corporate projects. see #dev/internal-tools on chat for details.
   if [[ -f /opt/dev/dev.sh ]]; then
     source /opt/dev/dev.sh
+    # else, we're going to have to manually setup chruby, vgo, rustup, pyenv
   fi
 
   # FZF requires the installation of https://github.com/junegunn/fzf, it's a
