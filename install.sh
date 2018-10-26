@@ -1,4 +1,7 @@
 #!/bin/sh
+tic config/xterm-256color-italic.terminfo
+tic config/tmux-256color-italic.terminfo
+
 mkdir -p "$HOME/.config"
 
 ln -s "$(pwd)/config/alacritty" "$HOME/.config/alacritty"
