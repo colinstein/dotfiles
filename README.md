@@ -30,3 +30,8 @@ on every computer.
 Minor updates to Alacritty to deal with deprecated options.
 
 GNU manpath environment updates
+
+Tmux prefix to something "ugly" as ^b conflicts with vim scrolling
+
+Bind pefix-space in tmux to something in Alacritty
+
