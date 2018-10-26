@@ -17,7 +17,7 @@ window:
   padding:
     x: 1
     y: 1
-  decorations: true
+  decorations: full
 
 scrolling:
   history: 0
@@ -28,7 +28,7 @@ scrolling:
 mouse:
   double_click: { threshold: 300 }
   triple_click: { threshold: 300 }
-  faux_scrollback_lines: 3
+  faux_scrolling_lines: 3
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
@@ -42,13 +42,13 @@ draw_bold_text_with_bright_colors: false
 
 font:
   normal:
-    family: Source Code Pro
+    family: Source Code Variable
     style: Regular
   bold:
-    family: Source Code Pro
+    family: Source Code Variable
     style: Medium
   italic:
-    family: Source Code Pro
+    family: Source Code Variable
     style: Light Italic
   size: 12.0
   offset:
