@@ -1,0 +1,11 @@
+# TERMINFO for xterm-256color with escape sequences for italics.
+# Install with:
+#
+#   tic tmux-256color-italic.terminfo
+#
+# Then export TERM in your .profile:
+#   export TERM=tmux-256color-italic
+#
+tmux-256color-italic|tmux with 256 colors and italic,
+        ritm=\E[23m, rmso=\E[27m, sitm=\E[3m, smso=\E[7m,
+        use=xterm-256color,
