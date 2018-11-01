@@ -13,6 +13,7 @@ mkdir -p "$HOME/.vim/backup"
 mkdir -p "$HOME/.vim/swap"
 mkdir -p "$HOME/.vim/undo"
 ln -s "$(pwd)/config/nvim/init.vim" "$HOME/.config/nvim/init.vim"
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 cat > "$HOME/.zshenv" << EOF
 # This is a stub file that sets ZDOTDIR and then loads the remainder of the zsh
@@ -32,4 +33,7 @@ ln -s "$(pwd)/config/git" "$HOME/.config/git"
 
 ln -s "$(pwd)/config/dircolors" "$HOME/.config/dircolors"
 
+mkdir -p "$(HOME)/Library/KeyBindings/"
 ln -s "$(pwd)/Library/KeyBindings/DefaultKeyBinding.dict" "$HOME/Library/KeyBindings/DefaultKeyBinding.dict"
+
+# nvim +PlugInstall +x +x
