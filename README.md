@@ -5,7 +5,7 @@ make much sense to try and re-invent the wheel, particularly in the case of
 Vim.
 
 Take a look at install.sh to see where files go, or run it. It's probably fine.
-There's a build-inn assumption that all the important stuff (vim, alacritty,
+There's a built-in assumption that all the important stuff (vim, alacritty,
 zsh, etc) has been installed by something like home brew or from ports.
 
 I'm leaning towards lower contrast, less colours, fewer features as time goes
@@ -16,8 +16,22 @@ Likewise, I'm leaning towards nord as a starting point towards a more
 monochromatic color scheme. This one only uses about 8 colours and uses them
 pretty sparingly in vim.
 
-TODO: replace the prompt's 'last part of pwd' with a 'shortened version of
+## Todo
+
+Replace the prompt's 'last part of pwd' with a 'shortened version of
 pwd'. Look into getting a more complete go configuration. Sadly my usual setup
 conflicts a bit with work tools so I need to figure something out there.
 Getting "good" suggestions for ruby would be nice - solargraph is supposed to
 be there but so far I haven't been impressed.
+
+Wrappers around chruby et al. to account for the fact that I may not have dev
+on every computer.
+
+Minor updates to Alacritty to deal with deprecated options.
+
+GNU manpath environment updates
+
+Tmux prefix to something "ugly" as ^b conflicts with vim scrolling
+
+Bind pefix-space in tmux to something in Alacritty
+
