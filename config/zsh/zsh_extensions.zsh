@@ -67,11 +67,4 @@ if [[ $- == *i* ]]; then;
   if [[ -f $ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] then
     source $ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
   fi
-
-  # Git installs some functionality for completion that might be worth checking
-  # out but it seems like the above auto-suggestions feature works pretty well
-  # without any additional help
-  # if [[ -f /usr/local/share/zsh/site-functions ]] then
-  #   source /usr/local/share/zsh/site-functions
-  # fi
 fi
