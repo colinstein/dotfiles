@@ -16,6 +16,18 @@ if [[ $- == *i* ]]; then;
   if [[ -f /opt/dev/dev.sh ]]; then
     source /opt/dev/dev.sh
     # else, we're going to have to manually setup chruby, vgo, rustup, pyenv
+  else
+    # source chruby
+    if [[ -f /usr/local/share/chruby/chruby.sh ]]; then
+      source /usr/local/share/chruby/chruby.sh
+    fi
+    # auto-changing is a nice feature to have at work when you're frequently
+    # swapping projects, but for my personal projects I prefer to manage that
+    # manually and keep everything 'up to date'. Set the default ruby version
+    # here (Note, it'll have to be installed manually:
+    #   ruby-build 2.5.3 ~/.rubies/ruby-2.5.3
+    # this is a location that chruby should automatically find it.
+    chruby 'ruby-2.5.3'
   fi
 
   # FZF requires the installation of https://github.com/junegunn/fzf, it's a
@@ -55,4 +67,11 @@ if [[ $- == *i* ]]; then;
   if [[ -f $ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]] then
     source $ZDOTDIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
   fi
+
+  # Git installs some functionality for completion that might be worth checking
+  # out but it seems like the above auto-suggestions feature works pretty well
+  # without any additional help
+  # if [[ -f /usr/local/share/zsh/site-functions ]] then
+  #   source /usr/local/share/zsh/site-functions
+  # fi
 fi
