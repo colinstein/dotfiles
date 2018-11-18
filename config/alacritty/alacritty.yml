@@ -12,8 +12,8 @@ shell:
 
 window:
   dimensions:
-    columns: 240
-    lines: 81
+    columns: 120
+    lines: 41
   padding:
     x: 1
     y: 1
@@ -29,6 +29,7 @@ mouse:
   double_click: { threshold: 300 }
   triple_click: { threshold: 300 }
   faux_scrolling_lines: 3
+  hide_when_typing: true
 
 selection:
   semantic_escape_chars: ",│`|:\"' ()[]{}<>"
@@ -50,19 +51,13 @@ font:
   italic:
     family: Source Code Variable
     style: Light Italic
-  size: 12.0
-  offset:
-    x: 0.0
-    y: 0.0
-  glyph_offset:
-    x: 0.0
-    y: 0.0
+  size: 14.0
   use_thin_strokes: true
 
-cursor_style: Block
-custom_cursor_colors: true
-hide_cursor_when_typing: false
-unfocused_hollow_cursor: true
+cursor:
+  style: Block
+  unfocused_hollow_cursor: true
+  unfocused_hollow: true
 
 background_opacity: 1.0
 colors:
