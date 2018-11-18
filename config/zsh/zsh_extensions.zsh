@@ -15,7 +15,7 @@ if [[ $- == *i* ]]; then;
   # internal corporate projects. see #dev/internal-tools on chat for details.
   if [[ -f /opt/dev/dev.sh ]]; then
     source /opt/dev/dev.sh
-    # else, we're going to have to manually setup chruby, vgo, rustup, pyenv
+    chruby '2.5.3'
   else
     # source chruby
     if [[ -f /usr/local/share/chruby/chruby.sh ]]; then
