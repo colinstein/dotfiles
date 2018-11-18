@@ -34,8 +34,8 @@ if [[ $- == *i* ]]; then;
   # general purpose command-line fuzzy finder. Its used within vim to provide
   # file picker duties but also at the CLI for finding tasks to kill,
   # directories or files to modify, etc.
-  if [[ -f $HOME/.fzf.zsh ]]; then
-    source $HOME/.fzf.zsh
+  if [[ -f /usr/local/Cellar/fzf/0.17.5/shell/key-bindings.zsh ]]; then
+    source /usr/local/Cellar/fzf/0.17.5/shell/key-bindings.zsh
     # with fzf loaded, we can set some useful binds and colours:
     # ^a to select all
     # ^d to deselect all
