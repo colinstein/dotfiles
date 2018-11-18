@@ -16,6 +16,16 @@ Likewise, I'm leaning towards nord as a starting point towards a more
 monochromatic color scheme. This one only uses about 8 colours and uses them
 pretty sparingly in vim.
 
+## Software to install
+- coreutils
+- fzf
+- neovim
+- reattach-to-user-namespace
+- ripgrep
+- telnet
+- tmux
+- urlview
+
 ## Todo
 
 Replace the prompt's 'last part of pwd' with a 'shortened version of
@@ -34,4 +44,3 @@ GNU manpath environment updates
 Tmux prefix to something "ugly" as ^b conflicts with vim scrolling
 
 Bind pefix-space in tmux to something in Alacritty
-
