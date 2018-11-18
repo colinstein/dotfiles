@@ -12,6 +12,13 @@
 autoload -Uz colors
 colors
 
+# add-zsh-hook allows us to wire up functions that are called automatically
+# when certain events happen. For example, a function that fire when the
+# current directory changes or before a command is executed. We'll be using
+# this in prompt.zsh to automtically compute a 'short' version of the
+# working directory to display in the prompt.
+autoload -Uz add-zsh-hook
+
 # Enable completion
 autoload -Uz compinit
 compinit -C
@@ -57,6 +64,12 @@ setopt chase_links
 # fat-fingered `^f` or were trying to scroll. This option disables the default
 # quit behaviour by making it ignore that character.
 setopt ignoreeof
+
+# Enable parameter expansion, command substitution and arithmetic expansion in
+# prompts. Substitutions within prompts do not affect the command status. This
+# is enabled so that a new 'SHORT_PWD' can be computed by a function that gives
+# the shortest possible non-ambiguous string to represent PWD in PS1.
+setopt prompt_subst
 
 # ensure the cdpath doesn't contain duplicates and add 'important' github
 # organizations to the cdpath to make it easier to activate projects that are
