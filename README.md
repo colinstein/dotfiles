@@ -34,5 +34,3 @@ pretty sparingly in vim.
   to be there but so far I haven't been impressed.
 
 - Minor updates to Alacritty to deal with deprecated options.
-
-- Tmux prefix to something "ugly" as ^b conflicts with vim scrolling

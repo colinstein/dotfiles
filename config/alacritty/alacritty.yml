@@ -150,11 +150,11 @@ key_bindings:
   # to some advice here.
   - { key: I, mods: Command|Option, chars: "\x00\x49" }
 
-
   - { key: Semicolon, mods: Command|Shift, chars: "\x00\x3a" } # tmux command mode
   - { key: R, mods: Command, chars: "\x00\x2c" } # tmux rename tab
   - { key: P, mods: Command, chars: "\x00\x71" } # tmux jump pane number
   - { key: U, mods: Command, chars: "\x00\x75" } # use URLView to make urls work
+  - { key: L, mods: Command, chars: "\x00\x20" } # Cycle through Tmux Layouts
 
   - { key: Left, mods: Command|Shift, chars: "\x00\x7b" } # swap with pane left
   - { key: Right, mods: Command|Shift, chars: "\x00\x7d" } # swap with pane right
