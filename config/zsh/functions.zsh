@@ -67,6 +67,31 @@ function public_key() {
   ssh-keygen -f $1 -y
 }
 
+# Sometimes you need a quick-and-dirty HTTP server running from a directory at
+# local host. Even better is if that can be acessed from "the real world"
+# Ideally you'd have the option to direct all requests to some CGI program that
+# can do useful stuff like dump the request, generate an arbitrary response, or
+# maybe do something a little less useless like server a directory. This is a
+# good candidate for having a computer running "somewhere" (home?) that can
+# handle HTTPS so the local version can be 'dumb'. In the mean time here's a
+# trivial little ruby one-liner to serve the current directory over http
+function http_server() {
+  local port="$1"
+  if [[ -z $1 ]]; then
+    port="8080"
+  fi
+  case $1 in
+    --help)
+      printf "try: http_server [port]\n"
+      printf "where [port] is a port to listen on.\n"
+      printf "[port] defaults to 8080.\n"
+      ;;
+    *)
+      ruby -run -e httpd . -p${port}
+      ;;
+  esac
+}
+
 # If for some reason you really want to purge the macOS DNS cache, this is the
 # way to do it. flush the cache and restart mDNSResponder
 function flush_dns() {
