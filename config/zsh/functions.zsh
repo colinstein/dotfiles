@@ -95,9 +95,9 @@ function weather () {
     --help)
       printf "try: 'tv [kind] [location]'\n"
       printf "kind\toptional\tone of all, small, or today\n"
-      printf"\t - all\tCurrent conditions plus three day forecast\n"
-      printf"\t - small\tThe current conditions only\n"
-      printf"\t - today\tThe current conditions plus full day forecast\n"
+      printf "\t - all\tCurrent conditions plus three day forecast\n"
+      printf "\t - small\tThe current conditions only\n"
+      printf "\t - today\tThe current conditions plus full day forecast\n"
       printf "place\toptional\tThe location to fetch weather\n"
       printf "defaults to 'today' 'ottawa'.\n"
       ;;
