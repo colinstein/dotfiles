@@ -97,7 +97,7 @@ bindkey "^ " autosuggest-execute
 # auto complete with tab key, function is defined in functions.zsh
 bindkey "^I" expand_or_complete_with_ellipses
 
-# Anable case-insizitve completion
+# Anable case-insensitive completion
 zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 zstyle ':completion:*:descriptions' format %{$fg[yellow]%}%d%f   # Draw group descriptions in yellow
@@ -117,8 +117,8 @@ zstyle ':completion:*:matches' group yes                          # Group matche
 zstyle ':completion:*' group-name ''                              # for any group
 
 # Turn on some default completers
-zstyle ':completion:::::' completer _complete _ignored _gnu_generic _approximate
-zstyle ':completion:*'    completer _complete _ignored _gnu_generic _approximate
+zstyle ':completion:::::' completer _complete _ignored _approximate
+zstyle ':completion:*'    completer _complete _ignored _approximate
 
 # CD Completion:
 zstyle ':completion:*:complete:(cd|pushd):*' tag-order 'local-directories named-directories'  # sort order
@@ -127,7 +127,3 @@ zstyle ':completion:*' list-dirs-first true                                     
 
 # CP RM and MV Completion
 zstyle ':completion:*:(rm|mv|cp):*' ignore-line yes    # Don't use words on the line as possible completions
-
-# enable the most recent installed ruby version
-# this needs a wrapper to detect chruby
-# chruby $(echo /opt/rubies/**(/[-1]) |cut -d/ -f4 )

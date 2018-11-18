@@ -151,5 +151,5 @@ function expand_or_complete_with_ellipses {
   zle expand-or-complete
   zle redisplay
 }
-zle -N expand_or_complete_with_ellipses # declare this as a widget for the zsh line editor"
-
+# declare this as a widget for the zsh line editor
+zle -N expand_or_complete_with_ellipses
