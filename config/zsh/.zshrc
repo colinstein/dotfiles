@@ -104,8 +104,8 @@ done
 bindkey . expand_dots # Binding the dot rationalizer to typing a "." in insert mode
 bindkey -M isearch . self-insert &>/dev/null # Don't rationalize dots in the search
 
-# accept the history recommendation with ctrl+space
-bindkey "^ " autosuggest-execute
+# accept the history recommendation with shift+tab
+bindkey '^[[Z' autosuggest-execute
 
 # auto complete with tab key, function is defined in functions.zsh
 bindkey "^I" expand_or_complete_with_ellipses
