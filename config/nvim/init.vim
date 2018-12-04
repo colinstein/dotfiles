@@ -227,8 +227,6 @@ set statusline+=%3p%%                                    " Percentage through th
 " Set colours: grey by default, green for insert mode
 hi StatusLine cterm=reverse ctermfg=0 ctermbg=4
 hi StatusLineNC cterm=reverse ctermfg=0 ctermbg=8
-" au InsertEnter * hi StatusLine cterm=reverse ctermfg=02 ctermbg=00
-" au Insertleave * hi StatusLine cterm=reverse ctermfg=08 ctermbg=00
 
 " Toggle 'zooming' a split to fill the screen and restore to it's previous size
 function! s:ZoomToggle() abort
@@ -304,15 +302,7 @@ function! LoadCscope()
 endfunction
 command! LoadCscope call LoadCscope()
 
-" Quick and dirty 'extract an assignment line to method' call
-function! RubyExtractMethod()
-  norm mm
-  :s/\s*\(\w*\)\s*=\(.*\)/\1\rdef \1\r  \2\rend\r/
-  norm k"idam[m"iPkvam=`m==$
-endfunction
-command! -nargs=* REM call RubyExtractMethod()
-
-" A set of fucntions that handle the edge cases of 
+" A set of fucntions that handle the edge cases of
 " xnoremap J :move '>+1<CR>gv=gv
 " xnoremap K :move '<-2<CR>gv=gv
 function! s:Move(address, at_limit)
