@@ -33,6 +33,8 @@ ln -s "$(pwd)/config/git" "$HOME/.config/git"
 
 ln -s "$(pwd)/config/dircolors" "$HOME/.config/dircolors"
 
+ln -s "$(pwd)/config/mopidy" "$HOME/.config/mopidy"
+
 mkdir -p "$HOME/Library/KeyBindings/"
 ln -s "$(pwd)/Library/KeyBindings/DefaultKeyBinding.dict" "$HOME/Library/KeyBindings/DefaultKeyBinding.dict"
 
