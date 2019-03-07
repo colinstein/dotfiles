@@ -51,7 +51,7 @@ font:
   italic:
     family: Source Code Variable
     style: Light Italic
-  size: 14.0
+  size: 18.0
   use_thin_strokes: true
 
 cursor:
