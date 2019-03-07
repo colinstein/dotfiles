@@ -33,6 +33,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'ncm2/ncm2-bufword'                     " Auto-completion suggestions based on words in  current buffer
 
   " Some language improvements
+  Plug 'leafgarland/typescript-vim'
   Plug 'tpope/vim-rails', { 'for': 'ruby' }
   Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
   Plug 'fatih/vim-go'

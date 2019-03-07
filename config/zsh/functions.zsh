@@ -109,16 +109,16 @@ function weather () {
 
   case $1 in
     all)
-      command curl -s http://wttr.in/${place}
+      command curl -s http://wttr.in/${place} | sed -e 's/0[2-4][0-9]m/4m/g'
       ;;
     small)
-      command curl -s http://wttr.in/${place} | head -n7 | tail -n5
+      command curl -s http://wttr.in/${place} | head -n7 | tail -n5 | sed -e 's/0[2-4][0-9]m/4m/g'
       ;;
     today)
-      command curl -s http://wttr.in/${place} | head -n17 | tail -n15
+      command curl -s http://wttr.in/${place} | head -n17 | tail -n15 | sed -e 's/0[2-4][0-9]m/4m/g'
       ;;
     --help)
-      printf "try: 'tv [kind] [location]'\n"
+      printf "try: 'weather [kind] [location]'\n"
       printf "kind\toptional\tone of all, small, or today\n"
       printf "\t - all\tCurrent conditions plus three day forecast\n"
       printf "\t - small\tThe current conditions only\n"
