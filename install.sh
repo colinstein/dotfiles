@@ -33,7 +33,7 @@ ln -s "$(pwd)/config/git" "$HOME/.config/git"
 
 ln -s "$(pwd)/config/dircolors" "$HOME/.config/dircolors"
 
-mkdir -p "$(HOME)/Library/KeyBindings/"
+mkdir -p "$HOME/Library/KeyBindings/"
 ln -s "$(pwd)/Library/KeyBindings/DefaultKeyBinding.dict" "$HOME/Library/KeyBindings/DefaultKeyBinding.dict"
 
 # nvim +PlugInstall +x +x
