@@ -25,9 +25,9 @@ if [[ $- == *i* ]]; then;
     # swapping projects, but for my personal projects I prefer to manage that
     # manually and keep everything 'up to date'. Set the default ruby version
     # here (Note, it'll have to be installed manually:
-    #   ruby-build 2.5.3 ~/.rubies/ruby-2.5.3
+    #   ruby-build 2.6.0 ~/.rubies/ruby-2.6.0
     # this is a location that chruby should automatically find it.
-    chruby 'ruby-2.5.3'
+    chruby 'ruby-2.6.0'
   fi
 
   # FZF requires the installation of https://github.com/junegunn/fzf, it's a
