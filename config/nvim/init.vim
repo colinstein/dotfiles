@@ -394,14 +394,14 @@ highlight DiffChange cterm=none ctermfg=9 ctermbg=0
 
 " improve configuration when dealing with diffs
 if &diff
-  set nospell
-  set nowrap
+  setlocal nospell
+  setlocal nowrap
   let g:diff_translations=0
-  set filetype=text
-  set syntax=diff
-  set diffopt+=iwhite
-  set diffexpr=""
-  set colorcolumn=0
+  setlocal filetype=text
+  setlocal syntax=diff
+  setlocal diffopt+=iwhite
+  setlocal diffexpr=""
+  setlocal colorcolumn=0
   autocmd FilterWritePre * if &diff | setlocal wrap< | set syntax=diff | set nofoldenable | set filetype=text | endif
   nnoremap ZZ :qa!<cr>
 end

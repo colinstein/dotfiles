@@ -43,7 +43,9 @@ function colours() {
 function gentags() {
   case $1 in
     ctags)
-      ripper-tags -f tags -R --exclude=.git --exclude=log . 2>/dev/null
+      ripper-tags -f tags -R --exclude=.git --exclude=log --exclude=db --exclude=doc --exclude=tmp --exclude=vendor --exclude=node_modules --exclude=public --exclude=public_service_workers --exclude=rbi . 2>/dev/null
+      # ripper-tags --recursive --tag-file=TAGS --exclude=.bundle --exclude=.git --exclude=db --exclude=doc --exclude=log --exclude=node_modules --exclude=public --exclude=public_service_workers --exclude=rbi --exclude=tmp --exclude=vendor --tag-relative .
+
       ;;
     cscope)
       starscope -e scope 2>/dev/null

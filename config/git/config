@@ -4,10 +4,6 @@
 
 [github]
   name = colinstein
-
-[credential]
-  helper = store
-
 [core]
   editor = nvim
   pager = less
@@ -35,6 +31,7 @@
 
 [diff]
   tool = nvimdiff
+	algorithm = patience
 
 [difftool "nvimdiff"]
   cmd = "nvim -R -d -u ~/.config/nvim/init.vim \"$REMOTE\" \"$LOCAL\""
@@ -57,3 +54,7 @@
   stashes = "!git stash list --pretty='%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs'"
   branchlog = log --pretty=format:'[%Cblue%an%Creset] %h %Cgreen%s%Creset' --numstat --reverse master..
   pr = "!f() { id=\"$1\"; git fetch origin pull/${id}/head:pr_${id}; git checkout pr_${id}; }; f"
+[protocol]
+	version = 2
+[credential]
+	helper = osxkeychain
