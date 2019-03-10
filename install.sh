@@ -35,6 +35,10 @@ ln -s "$(pwd)/config/dircolors" "$HOME/.config/dircolors"
 
 ln -s "$(pwd)/config/mopidy" "$HOME/.config/mopidy"
 
+ln -s "$(pwd)/config/ncmpcpp" "$HOME/.config/ncmpcpp"
+
+ln -s "$(pwd)/config/ckb-next" "$HOME/.config/ckb-next"
+
 mkdir -p "$HOME/Library/KeyBindings/"
 ln -s "$(pwd)/Library/KeyBindings/DefaultKeyBinding.dict" "$HOME/Library/KeyBindings/DefaultKeyBinding.dict"
 
