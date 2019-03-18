@@ -139,10 +139,10 @@ def_key "l"
 def_key "h"
   previous_column
 
-def_key "ctrl-]"
+def_key "}"
   seek_forward
 
-def_key "ctrl-["
+def_key "{"
   seek_backward
 
 def_key "K"
