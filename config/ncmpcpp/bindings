@@ -10,8 +10,11 @@ def_key "2"
 def_key "3"
   show_search_engine
 
-def_key "3"
+def_key "#"
   reset_search_engine
+
+def_key "shift-tab"
+  start_searching
 
 def_key "4"
   show_media_library
