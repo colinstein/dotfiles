@@ -198,7 +198,7 @@ nnoremap <silent> <leader>@ :registers<cr>
 nnoremap <silent> <leader>t :call fzf#vim#files('', {'options': '--preview-window=up:60% --preview "cat {}"'}, 1)<cr>
 nnoremap <silent> <Leader>b :Buffers<cr>
 nnoremap <silent> <leader>T :Tags<CR>
-nnoremap <silent> <leader>B :BTags<cr>
+nnoremap <silent> <leader>m :BTags<cr>
 
 " Search for words, F to open up Rg, f to search the word under the cursor
 nnoremap <leader>F :Rg 
