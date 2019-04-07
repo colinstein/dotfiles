@@ -2,6 +2,11 @@
 tic config/xterm-256color-italic.terminfo
 tic config/tmux-256color-italic.terminfo
 
+# Set a reasonable limit for maximum open files
+cp "$(pwd)/config/limit.maxfiles.plist" /Library/LaunchDaemons/.
+sudo chmod 0644 /Library/LaunchDaemons/limit.maxfiles.plist
+sudo chown root:wheel /Library/LaunchDaemons/limit.maxfiles.plist
+
 mkdir -p "$HOME/.config"
 
 ln -s "$(pwd)/config/alacritty" "$HOME/.config/alacritty"
