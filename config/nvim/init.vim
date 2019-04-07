@@ -111,7 +111,6 @@ set grepformat=%f:%l:%c:%m               " Enable parsing of Ripgrep results (fi
 
 " Color and appearance
 colorscheme nord                         " Use the nord colour scheme
-let g:nord_comment_brightness=12         " Make is so you can actually read comments
 let g:nord_italic=1                      " Enable italics for comments and args
 let g:netrw_banner=0                     " Disable the Netrw 'chrome'
 set background=dark                      " Enable Vim's 'use colours that look good on dark background' mode
