@@ -1,5 +1,19 @@
 # Dotfiles
 
+## Getting Started
+
+  1. `git clone ~/src/github.com/me/dotfiles` to get a copy of things
+  2. `git submodule init` to setup submodules for zsh
+  3. `git submodule update` to pull the latest updates
+  4. Read through `install.sh` and run commands. I'd do it line-by-line so
+     you can trust what's happening.
+  5. Modify `config/mopidy/mopidy.conf` to have your own spotify details
+  6. Look over `macsettings.sh` and apply them manually
+
+### Note
+This has a couple of submodules for ZSH syntax highlighting and autocomplete
+from history. Y
+
 I tend to shy away from large frameworks and plugins but sometimes it doesn't
 make much sense to try and re-invent the wheel, particularly in the case of
 Vim.
@@ -32,5 +46,3 @@ pretty sparingly in vim.
 
 - Getting "good" suggestions for ruby would be nice - solargraph is supposed
   to be there but so far I haven't been impressed.
-
-- Minor updates to Alacritty to deal with deprecated options.
