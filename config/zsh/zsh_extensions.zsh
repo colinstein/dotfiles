@@ -15,7 +15,7 @@ if [[ $- == *i* ]]; then;
   # internal corporate projects. see #dev/internal-tools on chat for details.
   if [[ -f /opt/dev/dev.sh ]]; then
     source /opt/dev/dev.sh
-    chruby '2.6.1'
+    chruby '2.6.3'
   else
     # source chruby
     if [[ -f /usr/local/share/chruby/chruby.sh ]]; then
@@ -27,7 +27,7 @@ if [[ $- == *i* ]]; then;
     # here (Note, it'll have to be installed manually:
     #   ruby-build 2.6.0 ~/.rubies/ruby-2.6.0
     # this is a location that chruby should automatically find it.
-    chruby 'ruby-2.6.2'
+    chruby 'ruby-2.6.3'
   fi
 
   # FZF requires the installation of https://github.com/junegunn/fzf, it's a
