@@ -4,7 +4,6 @@
 " * Fugitive or maybe git-gutter. Particularly with github integration
 " * Git-flavoured markdown maybe something for graphviz and CSVs? gabrielelana/vim-markdown
 " * Javascript, particularly react, typescript and node because we use them?
-" * HTML/CSS/Javascript plugins - zencoding and the like?
 " * Write up a 'prose' mode (80 columns, centered text, no autocomplete, etc)
 
 " Automatic plug-in handling
