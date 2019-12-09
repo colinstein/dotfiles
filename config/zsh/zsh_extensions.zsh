@@ -15,7 +15,7 @@ if [[ $- == *i* ]]; then;
   # internal corporate projects. see #dev/internal-tools on chat for details.
   if [[ -f /opt/dev/dev.sh ]]; then
     source /opt/dev/dev.sh
-    chruby '2.6.3'
+    chruby '2.6.5'
   else
     # source chruby
     if [[ -f /usr/local/share/chruby/chruby.sh ]]; then

@@ -11,7 +11,9 @@ call plug#begin('~/.local/share/nvim/plugged')
    function! DoRemote(arg)
     UpdateRemotePlugins
   endfunction
-  Plug '/usr/local/opt/fzf'                    " Quick searching for files
+  " Plug '/usr/local/opt/fzf'                    " Quick searching for files
+
+  Plug '/Users/colinstein/.nix-profile/share/vim-plugins/fzf-0.19.0'
   Plug 'arcticicestudio/nord-vim'
   Plug 'junegunn/fzf.vim'                      " More FZF, additional Vim power
   Plug 'w0rp/ale'                              " Linting in the gutter
