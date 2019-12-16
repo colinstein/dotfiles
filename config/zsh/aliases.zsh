@@ -6,12 +6,12 @@
 
 # Using neovim rather than vim has been a thing I've done for a while now, but
 # i can't get into the habit of typing slightly more characters.
-alias vim='nvim'
+# alias vim='nvim'
 
 # vimdiff is a program that comes bundled along with system vim, but as I'm
 # using neovim it won't load my configuration files. The solution is to alias
 # this to neovim's diff mode
-alias vimdiff='nvim -d'
+# alias vimdiff='nvim -d'
 
 # These aliases for ls use the GNU version which has many more features than
 # the BSD version that ships with my operating system. They're all very similar
@@ -37,9 +37,9 @@ alias vimdiff='nvim -d'
 # --literal prints entires without quoting. Instead of seeing a directory
 #   called "application support" printed as `'application support'/` it'll come
 #   out as `application support/`
-alias ls='ls --group-directories-first --color=auto --classify --literal --human-readable --si'
+# alias ls='ls --group-directories-first --color=auto --classify --literal --human-readable --si'
 # list in long format, including flags, owner, group, size, and date
-alias ll='ls --group-directories-first --color=auto --classify --literal --human-readable --si -l'
+# alias ll='ls --group-directories-first --color=auto --classify --literal --human-readable --si -l'
 # list 'all' entries, including ones that start with `.`. The -A ignores the
 # implied entires `.` and `..`, where as the -a version would include them
-alias la='ls --group-directories-first --color=auto --classify --literal --human-readable --si -A'
+# alias la='ls --group-directories-first --color=auto --classify --literal --human-readable --si -A'

@@ -49,8 +49,8 @@ if [[ $- == *i* ]]; then;
   # example turning all jpegs red, or all links blue. This builds an
   # environment variable used by ls to colour output by reading a config file
   # if it exists and the command to parse it does too
-  if [[ -f $HOME/.config/dircolors/nord.dircolors ]] && (( $+commands[gdircolors] )); then
-    eval $(gdircolors "$HOME/.config/dircolors/nord.dircolors")
+  if [[ -f $HOME/.config/dircolors/nord.dircolors ]] && (( $+commands[dircolors] )); then
+    eval $(dircolors "$HOME/.config/dircolors/nord.dircolors")
   fi
 
   # This places inline completion suggestions based on your command history. This
