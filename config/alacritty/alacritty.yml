@@ -1,12 +1,12 @@
 dynamic_title: false
 live_config_reload: true
-render_timer: false
+# render_timer: false
 
 env:
   TERM: xterm-256color-italic
 
 shell:
-  program: /usr/local/bin/zsh
+  program: /Users/colinstein/.nix-profile/bin/zsh
   args:
     - --login
 
@@ -22,7 +22,7 @@ window:
 scrolling:
   history: 0
   multiplier: 3
-  faux_multiplier: 3
+  #  faux_multiplier: 3
   auto_scroll: false
 
 mouse:
@@ -51,7 +51,7 @@ font:
   italic:
     family: Source Code Variable
     style: Light Italic
-  size: 18.0
+  size: 14.0
   use_thin_strokes: true
 
 cursor:
