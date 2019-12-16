@@ -11,9 +11,7 @@ call plug#begin('~/.local/share/nvim/plugged')
    function! DoRemote(arg)
     UpdateRemotePlugins
   endfunction
-  " Plug '/usr/local/opt/fzf'                    " Quick searching for files
-
-  Plug '/Users/colinstein/.nix-profile/share/vim-plugins/fzf-0.19.0'
+  Plug '/usr/local/opt/fzf'                    " Quick searching for files
   Plug 'arcticicestudio/nord-vim'
   Plug 'junegunn/fzf.vim'                      " More FZF, additional Vim power
   Plug 'w0rp/ale'                              " Linting in the gutter
@@ -104,7 +102,7 @@ let g:netrw_winsize=-40                      " Set the default width of the brow
 let g:netrw_list_hide='\(^\|\s\s\)\zs\.\S\+' " Enable hiding normally 'hidden' files in Netrw
 
 " Search and replace
-set inccommand=split                     " Show a preview of replacement commands as you type
+set inccommand=nosplit                   " Show a preview of replacement commands as you type
 set incsearch                            " Enable preview of a search while typing
 set nohlsearch                           " Disable highlighting previous search results
 set grepprg=rg\ --vimgrep\ --no-heading  " Enable the use of Ripgrep for searching
