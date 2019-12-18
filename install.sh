@@ -36,6 +36,8 @@ ln -s "$(pwd)/config/pry" "$HOME/.config/pry"
 
 ln -s "$(pwd)/config/git" "$HOME/.config/git"
 
+ln -s "$(pwd)/config/rubocop" "$HOME/.config/rubocop"
+
 ln -s "$(pwd)/config/dircolors" "$HOME/.config/dircolors"
 
 ln -s "$(pwd)/config/mopidy" "$HOME/.config/mopidy"

@@ -6,7 +6,7 @@ env:
   TERM: xterm-256color-italic
 
 shell:
-  program: /Users/colinstein/.nix-profile/bin/zsh
+  program: /usr/local/bin/zsh
   args:
     - --login
 
